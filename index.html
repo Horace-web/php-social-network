@@ -127,7 +127,7 @@
                         <?php endif; ?> -->
 
                         <!-- Formulaire d'inscription -->
-                        <form action="./traitement.php" method="post" class="form" id="inscription-form">  <!-- ID pour le cibler -->
+                        <form action="./vues/back-office/traitemnt_auth.php" method="post" class="form" id="inscription-form">  <!-- ID pour le cibler -->
                             <div class="mb-3">
                                 <label for="nom" class="form-label">Nom</label>
                                 <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrer votre nom" required >
@@ -154,7 +154,7 @@
                         </form>
 
                         <!-- Formulaire de connexion -->
-                        <form action="./traitement.php" method="post" class="form hidden" id="connexion-form">  <!-- ID et classe hidden pour le cacher -->
+                        <form action="./vues/back-office/traitemnt_auth.php" method="post" class="form hidden" id="connexion-form">  <!-- ID et classe hidden pour le cacher -->
                             <div class="mb-3">
                                 <label for="email_connexion" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email_connexion" placeholder="Entrer votre email" required>
