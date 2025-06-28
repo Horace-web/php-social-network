@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,7 +115,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                            <!-- <?php if (isset($_SESSION['registration_error'])): ?>
+                            <?php if (isset($_SESSION['registration_error'])): ?>
                             <div class="alert alert-danger">
                                 <?= $_SESSION['registration_error'] ?>
                             </div>
@@ -124,10 +127,24 @@
                                 <?= $_SESSION['login_error'] ?>
                             </div>
                             <?php unset($_SESSION['login_error']); ?>
-                        <?php endif; ?> -->
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['mail_sent_error'])): ?>
+                            <div class="alert alert-danger">
+                                <?= $_SESSION['mail_sent_error'] ?>
+                            </div>
+                            <?php unset($_SESSION['mail_sent_error']); ?>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['mail_sent_succes'])): ?>
+                            <div class="alert alert-success">
+                                <?= $_SESSION['mail_sent_succes'] ?>
+                            </div>
+                            <?php unset($_SESSION['mail_sent_succes']); ?>
+                        <?php endif; ?>
 
                         <!-- Formulaire d'inscription -->
-                        <form action="./vues/back-office/traitemnt_auth.php" method="post" class="form" id="inscription-form">  <!-- ID pour le cibler -->
+                        <form action="./api/traitemnt_auth.php" method="post" class="form" id="inscription-form">  <!-- ID pour le cibler -->
                             <div class="mb-3">
                                 <label for="nom" class="form-label">Nom</label>
                                 <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrer votre nom" required >
@@ -154,7 +171,7 @@
                         </form>
 
                         <!-- Formulaire de connexion -->
-                        <form action="./vues/back-office/traitemnt_auth.php" method="post" class="form hidden" id="connexion-form">  <!-- ID et classe hidden pour le cacher -->
+                        <form action="./api/traitemnt_auth.php" method="post" class="form hidden" id="connexion-form">  <!-- ID et classe hidden pour le cacher -->
                             <div class="mb-3">
                                 <label for="email_connexion" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email_connexion" placeholder="Entrer votre email" required>

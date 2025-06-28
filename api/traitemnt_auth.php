@@ -21,52 +21,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email']; // Ne pas échapper l'email pour conserver le format
         $motDePasse = $_POST['password'];
         $password_hash = password_hash($motDePasse, PASSWORD_DEFAULT);
+        $token = bin2hex(random_bytes(32));
 
         // Validation
         if (empty($nom) || empty($prenom) || empty($email) || empty($motDePasse)) {
             $_SESSION['registration_error'] = "Veuillez remplir tous les champs.";
-            header("Location: index.php");
+            header("Location: ../index.php");
             exit();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['registration_error'] = "Adresse email invalide.";
-            header("Location: index.php");
+            header("Location: ../index.php");
             exit();
         }
 
         
-        // Vérifier si l'email existe déjà
-            $checkEmail = $bdd->prepare("SELECT id FROM utilisateurs WHERE email = :email");
-            $checkEmail->execute(['email' => $email]);
+        // // Vérifier si l'email existe déjà
+        //     $checkEmail = $bdd->prepare("SELECT id FROM utilisateurs WHERE email = :email");
+        //     $checkEmail->execute(['email' => $email]);
 
-            if ($checkEmail->rowCount() > 0) {
-                afficherErreurInscription("Cet email est déjà utilisé.");
-                header("Location: index.php");
-                exit();
-            }
+        //     if ($checkEmail->rowCount() > 0) {
+        //         afficherErreurInscription("Cet email est déjà utilisé.");
+        //         header("Location: index.php");
+        //         exit();
+        //     }
 
             // Si l'email est libre, on insère
-            $req = $bdd->prepare("INSERT INTO utilisateurs(nom, prenom, email, motDePasse) VALUES(:nom, :prenom, :email, :motDePasse)");
+            $req = $bdd->prepare("INSERT INTO utilisateurs(nom, prenom, email, motDePasse , token) VALUES(:nom, :prenom, :email, :motDePasse , :token)");
             $stmt = $req->execute([
                 "nom" => $nom,
                 "prenom" => $prenom,
                 "email" => $email,
-                "motDePasse" => $password_hash
+                "motDePasse" => $password_hash,
+                "token" => $token
             ]);
 
 
-        if ($stmt) {
-            $_SESSION['user_id'] = $bdd->lastInsertId();
-            $_SESSION['user_name'] = $nom . ' ' . $prenom;
-            $_SESSION['auth'] = true;
-            header("Location: accueil.php");
-            exit();
-        } else {
-            $_SESSION['registration_error'] = "Erreur lors de l'inscription.";
-            header("Location: index.php");
-            exit();
-        }
+            if ($stmt) {
+                require 'mailer.php';
+                if (envoyerConfirmation($email, $prenom, $token)) {
+                    $_SESSION['mail_sent_succes'] = "Un email de confirmation vous a été envoyé.";
+                } else {
+                    $_SESSION['mail_sent_error'] = "Inscription réussie mais email non envoyé.";
+                }
+            
+                header("Location: ../index.php");
+                exit();
+            }
     }
 
     // Traitement connexion
@@ -79,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             afficherErreur("Email invalide.");
         } else {
-            $sql = "SELECT id, nom, prenom, motDePasse FROM utilisateurs WHERE email = :email";
+            $sql = "SELECT id, nom, prenom, motDePasse ,est_active FROM utilisateurs WHERE email = :email";
             $stmt = $bdd->prepare($sql);
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -93,16 +95,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['nom'] . ' ' . $user['prenom'];
                 $_SESSION['auth'] = true;
-                header("Location: accueil.php");
+                header("Location: accueil.html");
                 exit();
             } else {
                 afficherErreur("Identifiants incorrects.");
             }
+            if (!$user['est_active']) {
+                afficherErreur("Veuillez confirmer votre compte par email.");
+                header("Location: index.php");
+                exit();
+            }
+            
         }
 
         // Redirection en cas d’erreur connexion
         if (isset($_SESSION['login_error'])) {
-            header("Location: index.php");
+            header("Location: index.html");
             exit();
         }
     } else {
