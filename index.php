@@ -182,10 +182,15 @@ session_start();
                                 <input type="password" class="form-control" id="password" name="password_connexion" placeholder="Entrer votre mot de passe" required>
                                 <span id="password-error" class="error-message"></span> <!-- Pour afficher les erreurs -->
                             </div>
+                            <div class="text-end mt-2">
+                                <a href="vues/clients/forgot.php" class="text-primary small">Mot de passe oublié ?</a>
+                            </div>
+
                             <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-primary">Se connecter</button>
                             </div>
                         </form>
+                        <div id="login-error" class="text-danger mt-2"></div>
                     </div>
                 </div>
             </div>
@@ -294,6 +299,32 @@ session_start();
                  inscriptionForm.submit(); 
              }
          }
+            // Utilisation de sessionStorage pour stocker les identifiants de l'utilisateur
+            document.getElementById("connexion-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            fetch("api/login.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // On stocke les infos dans sessionStorage
+                    sessionStorage.setItem("user", JSON.stringify(data.user));
+                    window.location.href = "vues/clients/accueil.php";
+                } else {
+                    document.getElementById("login-error").textContent = data.message;
+                }
+            })
+            .catch(err => {
+                document.getElementById("login-error").textContent = "Erreur réseau.";
+                console.error(err);
+            });
+        });
      </script>
 </body>
 </html>

@@ -37,15 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         
-        // // Vérifier si l'email existe déjà
-        //     $checkEmail = $bdd->prepare("SELECT id FROM utilisateurs WHERE email = :email");
-        //     $checkEmail->execute(['email' => $email]);
+        // Vérifier si l'email existe déjà
+            $checkEmail = $bdd->prepare("SELECT id FROM utilisateurs WHERE email = :email");
+            $checkEmail->execute(['email' => $email]);
 
-        //     if ($checkEmail->rowCount() > 0) {
-        //         afficherErreurInscription("Cet email est déjà utilisé.");
-        //         header("Location: index.php");
-        //         exit();
-        //     }
+            if ($checkEmail->rowCount() > 0) {
+                afficherErreurInscription("Cet email est déjà utilisé.");
+                header("Location: ../index.php");
+                exit();
+            }
 
             // Si l'email est libre, on insère
             $req = $bdd->prepare("INSERT INTO utilisateurs(nom, prenom, email, motDePasse , token) VALUES(:nom, :prenom, :email, :motDePasse , :token)");
@@ -91,20 +91,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // exit();
 
 
-            if ($user && password_verify($password, $user['motDePasse'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_name'] = $user['nom'] . ' ' . $user['prenom'];
-                $_SESSION['auth'] = true;
-                header("Location: accueil.html");
-                exit();
-            } else {
-                afficherErreur("Identifiants incorrects.");
-            }
-            if (!$user['est_active']) {
-                afficherErreur("Veuillez confirmer votre compte par email.");
-                header("Location: index.php");
-                exit();
-            }
+            // if ($user && password_verify($password, $user['motDePasse'])) {
+            //     $_SESSION['user_id'] = $user['id'];
+            //     $_SESSION['user_name'] = $user['nom'] . ' ' . $user['prenom'];
+            //     $_SESSION['auth'] = true;
+            //     header("Location: ../vues/clients/accueil.php");
+            //     exit();
+            // } else {
+            //     afficherErreur("Identifiants incorrects.");
+            // }
+            // if (!$user['est_active']) {
+            //     afficherErreur("Veuillez confirmer votre compte par email.");
+            //     header("Location: ../index.php");
+            //     exit();
+            // }
             
         }
 
