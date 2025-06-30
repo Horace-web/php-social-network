@@ -7,8 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 function envoyerConfirmation($email, $prenom, $token) {
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 0; // ou 3 pour + de détails
-    $mail->Debugoutput = 'html';
+    
 
 
     try {
