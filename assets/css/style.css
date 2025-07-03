@@ -196,7 +196,6 @@ body {
     flex: 1;
 }
 
-/* Icônes du centre avec espacement proportionnel */
 .topbar .center i {
     padding: 0 50px;
     font-size: 24px;
@@ -214,7 +213,6 @@ body {
     background-color: #1877f2;
 }
 
-/* Recherche améliorée */
 .topbar input {
     padding: 10px 15px;
     width: 240px;
@@ -225,7 +223,6 @@ body {
     font-size: 15px;
 }
 
-/* Icônes de droite */
 .topbar .right i {
     background-color: #3a3b3c;
     padding: 8px;
@@ -237,6 +234,8 @@ body {
     display: flex;
     padding: 20px;
     gap: 20px;
+    align-items: flex-start;
+    /* Ajoutez ceci pour aligner les éléments en haut */
 }
 
 .sidebar {
@@ -279,7 +278,10 @@ body {
 .feed {
     flex: 1;
     max-width: 680px;
-    margin: 0 20px;
+    min-width: 500px;
+    /* Ajoutez une largeur minimale */
+    margin: 0 auto;
+    /* Centre le feed */
 }
 
 .create-post {
@@ -320,11 +322,33 @@ body {
     padding: 10px 15px;
     position: sticky;
     top: 80px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 100px);
+    /* Ajustez cette valeur si nécessaire */
     overflow-y: auto;
+    background-color: #242526;
+    /* Ajoutez une couleur de fond */
+    border-radius: 10px;
+    /* Optionnel */
+    margin-left: 20px;
+    /* Espacement depuis le feed */
+    z-index: 10;
 }
 
-/* Styles pour les posts */
+.right-section {
+    width: 100%;
+    /* Prend toute la largeur de la rightbar */
+    margin-bottom: 20px;
+    /* Espace entre les sections */
+    background-color: #242526;
+    /* Même couleur que la rightbar */
+    border-radius: 8px;
+    /* Cohérence visuelle */
+    padding: 12px;
+    /* Padding intérieur */
+}
+
+/* Supprimez la classe .right-section ou fusionnez-la avec .rightbar */
+
 .post-header {
     display: flex;
     align-items: center;
@@ -350,15 +374,20 @@ body {
     margin-top: 2px;
 }
 
+.post-image {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+    object-fit: cover;
+    height: auto;
+}
+
 .post-content {
     margin-bottom: 15px;
     line-height: 1.4;
-}
-
-.post-image {
-    width: 100%;
-    border-radius: 8px;
-    margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .post-actions {
@@ -368,15 +397,21 @@ body {
     border-bottom: 1px solid #3e4042;
     padding: 8px 0;
     margin: 10px 0;
+    width: 100%;
 }
 
 .post-action {
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
     color: #b0b3b8;
+    transition: all 0.2s ease;
+    position: relative;
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
 }
 
 .post-action:hover {
@@ -387,151 +422,34 @@ body {
     margin-right: 5px;
 }
 
+/* États des réactions */
 .post-action.liked {
     color: #1877f2;
 }
 
-.post-comments {
-    margin-top: 10px;
+.post-action.loved {
+    color: #f3425f;
 }
 
-.comment {
-    display: flex;
-    margin-bottom: 10px;
+.post-action.haha {
+    color: #f7b928;
 }
 
-.comment-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
+.post-action.wow {
+    color: #f7b928;
 }
 
-.comment-content {
-    background-color: #3a3b3c;
-    padding: 8px 12px;
-    border-radius: 18px;
-    flex: 1;
+.post-action.sad {
+    color: #f7b928;
 }
 
-.comment-author {
-    font-weight: bold;
-    font-size: 13px;
-    color: #e4e6eb;
+.post-action.angry {
+    color: #e9710f;
 }
 
-.comment-text {
-    font-size: 14px;
-    margin-top: 2px;
-}
-
-.add-comment {
-    display: flex;
-    margin-top: 10px;
-    align-items: center;
-}
-
-.comment-input {
-    flex: 1;
-    background-color: #3a3b3c;
-    border: none;
-    border-radius: 18px;
-    padding: 8px 12px;
-    color: #e4e6eb;
-    margin-right: 10px;
-}
-
-.comment-submit {
-    background: none;
-    border: none;
-    color: #1877f2;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Styles pour la section "Quoi de neuf" */
-.status-input {
-    flex: 1;
-    background-color: #3a3b3c;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 15px;
-    color: #e4e6eb;
-    font-size: 15px;
-}
-
-.post-options {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.post-option {
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    flex: 1;
-    justify-content: center;
-}
-
-.post-option:hover {
-    background-color: #3a3b3c;
-}
-
-.post-option i {
-    margin-right: 8px;
-    font-size: 18px;
-}
-
-/* Styles pour les stories */
-.stories-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 15px 0;
-    margin-bottom: 20px;
-}
-
-.story {
-    min-width: 110px;
-    height: 200px;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.story img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.story-author {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-weight: bold;
-    font-size: 13px;
-    color: white;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Styles pour les réactions */
+/* Tooltip des réactions - STATIQUE */
 .reaction-options {
     position: relative;
-    display: inline-block;
-}
-
-.reaction-btn {
-    cursor: pointer;
 }
 
 .reaction-tooltip {
@@ -541,33 +459,49 @@ body {
     transform: translateX(-50%);
     background: #fff;
     border-radius: 30px;
-    padding: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     display: none;
-    z-index: 100;
+    z-index: 1000;
+    margin-bottom: 10px;
+    /* IMPORTANT: Aucune transition pour éviter le mouvement */
+    transition: none !important;
+    /* Position fixe pour éviter les décalages */
+    white-space: nowrap;
+}
+
+.reaction-tooltip.show {
+    display: flex !important;
+    /* Forcer l'affichage sans animation */
+    opacity: 1;
+    visibility: visible;
 }
 
 .reaction-tooltip:hover {
-    display: flex;
-}
-
-.reaction-options:hover .reaction-tooltip {
-    display: flex;
+    display: flex !important;
 }
 
 .reaction-icon {
-    width: 30px;
-    height: 30px;
-    margin: 0 2px;
-    transition: transform 0.2s;
+    width: 35px;
+    height: 35px;
+    margin: 0 3px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    font-size: 18px;
+    /* Seules les icônes peuvent avoir des transitions, pas le conteneur */
+    transition: transform 0.2s ease;
+    /* Empêcher le mouvement du conteneur */
+    flex-shrink: 0;
 }
 
 .reaction-icon:hover {
-    transform: scale(1.3) translateY(-10px);
+    transform: scale(1.2) translateY(-5px);
 }
 
-/* Couleurs des réactions */
+/* Couleurs des icônes de réaction */
 .reaction-like {
     color: #1877f2;
 }
@@ -653,17 +587,211 @@ body {
     font-size: 30px;
 }
 
-/* Styles pour la colonne droite */
-.rightbar {
-    width: 360px;
+.status-input {
+    flex: 1;
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 20px;
     padding: 10px 15px;
-    position: sticky;
-    top: 80px;
-    height: calc(100vh - 80px);
-    overflow-y: auto;
+    color: #e4e6eb;
+    font-size: 15px;
 }
 
-/* Carte sponsorisée */
+.post-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    border-top: 1px solid #3e4042;
+    /* Ligne de séparation */
+    padding-top: 10px;
+    /* Espace après la ligne */
+}
+
+.post-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+    justify-content: center;
+    margin: 0 5px;
+    /* Petit espace entre les boutons */
+    color: #b0b3b8;
+    /* Couleur de texte par défaut */
+    font-weight: 500;
+    /* Légèrement plus gras */
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+/* Supprime le hover générique ici, car nous voulons des effets spécifiques */
+/* .post-option:hover { background-color: #3a3b3c; } */
+
+.post-option i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* NOUVEAU: Styles spécifiques pour chaque bouton de création de post */
+
+/* Vidéo en direct (rouge) */
+.post-option:has(i.red):hover {
+    /* Utilise :has() pour cibler le parent qui contient l'icône rouge */
+    background-color: rgba(240, 40, 73, 0.15) !important;
+    /* Rouge très léger au survol */
+    transform: translateY(-3px) !important;
+    /* Mouvement vers le haut */
+    box-shadow: 0 4px 10px rgba(240, 40, 73, 0.25) !important;
+    /* Ombre colorée */
+    filter: brightness(1.1) !important;
+    /* Légère luminosité */
+}
+
+/* Assurez-vous que l'icône garde sa couleur si elle est ciblée par un autre hover générique */
+.post-option:has(i.red) i {
+    color: #f02849;
+    /* S'assure que l'icône reste rouge */
+}
+
+/* Photo/vidéo (vert) */
+.post-option:has(i.green):hover {
+    background-color: rgba(49, 162, 76, 0.15) !important;
+    /* Vert très léger au survol */
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 10px rgba(49, 162, 76, 0.25) !important;
+    filter: brightness(1.1) !important;
+}
+
+.post-option:has(i.green) i {
+    color: #31a24c;
+    /* S'assure que l'icône reste verte */
+}
+
+/* Humeur/activité (jaune/orange) */
+.post-option:has(i.yellow):hover {
+    background-color: rgba(247, 185, 40, 0.15) !important;
+    /* Jaune très léger au survol */
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 10px rgba(247, 185, 40, 0.25) !important;
+    filter: brightness(1.1) !important;
+}
+
+.post-option:has(i.yellow) i {
+    color: #f7b928;
+    /* S'assure que l'icône reste jaune */
+}
+
+
+.stories-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.story {
+    min-width: 110px;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.story img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-author {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* IMPORTANT: Exclure les tooltips des transitions globales */
+button,
+[class*="btn"],
+[class*="button"],
+[class*="action"],
+i[onclick],
+[role="button"],
+[tabindex="0"],
+.post-action,
+.sidebar p,
+.topbar i
+
+/* Retire .post-option de ce sélecteur général pour gérer son hover spécifiquement */
+    {
+    transition: all 0.25s ease !important;
+}
+
+/* Exceptions: PAS de transition pour les tooltips */
+.reaction-tooltip,
+.reaction-tooltip * {
+    transition: none !important;
+}
+
+/* Seules les icônes individuelles peuvent bouger */
+.reaction-icon {
+    transition: transform 0.2s ease !important;
+}
+
+button:hover,
+[class*="btn"]:hover,
+[class*="button"]:hover,
+[class*="action"]:hover,
+i[onclick]:hover,
+[role="button"]:hover,
+[tabindex="0"]:hover,
+.post-action:hover,
+.sidebar p:hover,
+.topbar i:hover {
+    /* Ces propriétés seront gérées par les hovers spécifiques des post-option */
+    background-color: #3a3b3c !important;
+    /* Revert to standard gray hover for general elements */
+    transform: translateY(-2px) !important;
+    box-shadow:
+        0 4px 12px rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(24, 119, 242, 0.2) !important;
+    filter: brightness(1.1) !important;
+}
+
+/* Ajout d'une règle générale pour .post-option:hover si aucune règle spécifique n'est appliquée (par exemple, si une autre .post-option sans i.red/green/yellow existait) */
+.post-option:hover {
+    background-color: #3a3b3c;
+    /* Revert to the standard gray hover for uncolored post-options */
+    /* Ces propriétés peuvent être surchargées par les règles :has() */
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 12px rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(24, 119, 242, 0.2);
+    filter: brightness(1.1);
+}
+
+/* Exception: le tooltip ne doit PAS bouger au survol */
+.reaction-tooltip:hover,
+.reaction-options:hover .reaction-tooltip {
+    transform: translateX(-50%) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    filter: none !important;
+}
+
+.post:hover {
+    box-shadow:
+        0 6px 20px rgba(255, 255, 255, 0.18),
+        0 3px 6px rgba(24, 119, 242, 0.25) !important;
+    transform: translateY(-3px) !important;
+}
+
 .sponsored-card {
     background-color: #242526;
     border-radius: 10px;
@@ -701,20 +829,7 @@ body {
     margin-bottom: 10px;
 }
 
-.sponsored-image {
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-/* Section générique */
-.right-section {
-    background-color: #242526;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    padding: 12px;
-}
-
+/* .section-header */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -732,22 +847,163 @@ body {
     text-decoration: none;
 }
 
-/* Éléments de contact */
-.contact-item {
+.contacts-icons {
     display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.contacts-icons i {
+    color: #b0b3b8;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.contacts-icons i:hover {
+    background-color: #3a3b3c;
+}
+
+.messenger-contact {
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 2px;
+}
+
+.messenger-contact:hover {
+    background-color: #3a3b3c;
+}
+
+.contact-avatar-wrapper {
+    position: relative;
+    margin-right: 12px;
 }
 
 .contact-avatar {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    margin-right: 10px;
+    object-fit: cover;
+}
+
+.meta-ai-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #00d4ff, #ff4081, #ffeb3b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.verified-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    background-color: #1877f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #242526;
+}
+
+.verified-badge i {
+    color: white;
+    font-size: 10px;
+}
+
+.online-status {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #242526;
+}
+
+.online-status.online {
+    background-color: #31a24c;
+}
+
+.online-status.offline {
+    background-color: #8a8d91;
+}
+
+.online-status.recent {
+    background-color: #8a8d91;
 }
 
 .contact-name {
-    font-weight: bold;
+    font-weight: 500;
+    color: #e4e6eb;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.last-seen {
+    color: #b0b3b8;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.group-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #3a3b3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b0b3b8;
+    font-size: 16px;
+}
+
+.group-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background-color: #42b883;
+    color: white;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 8px;
+    border: 1px solid #242526;
+    min-width: 20px;
+    text-align: center;
+}
+
+.group-description {
+    color: #b0b3b8;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.create-group-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #3a3b3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b0b3b8;
+    font-size: 16px;
+}
+
+.section-title {
+    color: #b0b3b8;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 12px 8px 12px;
+    margin-top: 10px;
 }
 
 .mutual-friends {
@@ -780,7 +1036,6 @@ body {
     color: #e4e6eb;
 }
 
-/* Anniversaires */
 .birthday-content {
     display: flex;
     align-items: center;
@@ -790,4 +1045,138 @@ body {
     content: "🎉";
     margin-right: 10px;
     font-size: 20px;
+}
+
+/* Styles pour la section de commentaires */
+.post-comments {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #3e4042;
+    /* Ligne de séparation */
+    /* display: none; sera géré par le JavaScript */
+}
+
+.comment-stats {
+    color: #b0b3b8;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: right;
+    /* Aligner le compteur à droite comme FB */
+}
+
+.comment-input-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-input-area .comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    /* Empêche l'avatar de rétrécir */
+}
+
+.comment-input {
+    flex: 1;
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 12px;
+    color: #e4e6eb;
+    font-size: 14px;
+    outline: none;
+    /* Supprime le contour au focus */
+    transition: background-color 0.2s;
+}
+
+.comment-input:focus {
+    background-color: #4e4f50;
+    /* Légèrement plus clair au focus */
+}
+
+.comments-list {
+    margin-top: 10px;
+}
+
+.comment-item {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-start;
+    /* Aligner l'avatar en haut du commentaire */
+}
+
+.comment-item .comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-content-and-actions {
+    display: flex;
+    flex-direction: column;
+    /* Pour empiler le contenu et les actions */
+    flex-grow: 1;
+    /* Permet de prendre l'espace disponible */
+}
+
+.comment-content-wrapper {
+    background-color: #3a3b3c;
+    border-radius: 18px;
+    /* Plus rond pour ressembler aux bulles FB */
+    padding: 8px 12px;
+    max-width: fit-content;
+    /* S'adapte au contenu */
+    margin-bottom: 4px;
+    /* Espace entre bulle et actions */
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #e4e6eb;
+    font-size: 13px;
+    margin-bottom: 2px;
+    /* Espace entre nom et texte */
+    display: block;
+    /* S'assure que le nom est sur sa propre ligne */
+}
+
+.comment-text {
+    color: #e4e6eb;
+    font-size: 14px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    /* Gère les longs mots */
+}
+
+.comment-actions-row {
+    display: flex;
+    gap: 10px;
+    margin-left: 12px;
+    /* Décalage pour aligner sous le texte */
+    font-size: 12px;
+    color: #b0b3b8;
+}
+
+.comment-action-link {
+    color: #b0b3b8;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    /* Plus gras pour les actions */
+}
+
+.comment-action-link:hover {
+    text-decoration: underline;
+}
+
+.comment-time {
+    color: #b0b3b8;
+    font-size: 12px;
 }
