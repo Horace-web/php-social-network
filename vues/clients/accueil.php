@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <div class="topbar">
         <div class="left">
             <div class="fb-logo-circle">
@@ -40,10 +39,7 @@
         </div>
     </div>
 
-    <!-- Contenu principal -->
     <div class="container">
-
-        <!-- Menu gauche -->
         <div class="sidebar">
             <p><i class="fa-solid fa-user icon blue"></i> Léger Lerger</p>
             <p><i class="fa-solid fa-robot icon violet"></i> Meta AI</p>
@@ -53,8 +49,6 @@
             <p><i class="fa-solid fa-people-group icon cyan"></i> Groupes</p>
             <p><i class="fa-solid fa-store blue"></i> Marketplace</p>
 
-            <!-- Le bouton déplacé à la fin quand visible -->
-            <!-- Bouton VOIR PLUS (affiché au début) -->
             <p id="btn-voir-plus" class="voir-plus-btn" onclick="toggleVoirPlus(true)">
                 <i class="fa-solid fa-chevron-down icon grey"></i> Voir plus
             </p>
@@ -78,7 +72,6 @@
                 <p><i class="fa-solid fa-clock-rotate-left icon purple"></i> Souvenirs</p>
                 <p><i class="fa-solid fa-video icon blue"></i> Vidéos de gaming</p>
 
-                <!-- BOUTON VOIR MOINS (à la fin de la section) -->
                 <p id="btn-voir-moins" class="voir-plus-btn" onclick="toggleVoirPlus(false)">
                     <i class="fa-solid fa-chevron-up icon grey"></i> Voir moins
                 </p>
@@ -94,9 +87,7 @@
             </div>
         </div>
 
-        <!-- Fil d'actualité central -->
         <div class="feed">
-            <!-- Section "Quoi de neuf" -->
             <div class="create-post">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Profil" class="post-avatar">
@@ -118,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Stories -->
             <div class="stories-container">
                 <div class="story">
                     <img src="https://via.placeholder.com/110x200" alt="Story">
@@ -138,7 +128,11 @@
                 </div>
                 <div class="story">
                     <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">L'assurance</div>
+                    <div class="story-author">Unité</div>
+                </div>
+                <div class="story">
+                    <img src="https://via.placeholder.com/110x200" alt="Story">
+                    <div class="story-author">Génage</div>
                 </div>
                 <div class="story">
                     <img src="https://via.placeholder.com/110x200" alt="Story">
@@ -146,12 +140,10 @@
                 </div>
                 <div class="story">
                     <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Sange Dani</div>
+                    <div class="story-author">Génage</div>
                 </div>
             </div>
 
-            <!-- Post normal (non sponsorisé) -->
-            <!-- Post 1 -->
             <div class="post" data-post-id="1">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
@@ -162,36 +154,59 @@
                 </div>
                 <div class="post-content">
                     Il y a un premier coteur au dit : "Bon sang !" puis deux chevques sont élevées. "Il faut
-                    toujours
-                    savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
+                    toujours savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
                 </div>
-                <div class="post-action reaction-options">
-                    <div class="reaction-btn" onclick="toggleReaction(this, 1)">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <span>J'aime</span>
-                    </div>
-                    <div class="reaction-tooltip">
-                        <div class="reaction-icon reaction-like" onclick="setReaction(1, 'like')">
+                <div class="post-actions">
+                    <div class="post-action reaction-options" data-post-id="1">
+                        <div class="reaction-btn" onclick="handleReactionClick(1, event)"
+                            onmouseenter="handleReactionHover(1)" onmouseleave="hideReactionTooltip(1)">
                             <i class="fa-solid fa-thumbs-up"></i>
+                            <span>J'aime</span>
                         </div>
-                        <div class="reaction-icon reaction-love" onclick="setReaction(1, 'love')">
-                            <i class="fa-solid fa-heart"></i>
+                        <div class="reaction-tooltip">
+                            <div class="reaction-icon reaction-like" onclick="setReaction(1, 'like', event)">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </div>
+                            <div class="reaction-icon reaction-love" onclick="setReaction(1, 'love', event)">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="reaction-icon reaction-haha" onclick="setReaction(1, 'haha', event)">
+                                <i class="fa-solid fa-face-laugh-squint"></i>
+                            </div>
+                            <div class="reaction-icon reaction-wow" onclick="setReaction(1, 'wow', event)">
+                                <i class="fa-solid fa-face-surprise"></i>
+                            </div>
+                            <div class="reaction-icon reaction-sad" onclick="setReaction(1, 'sad', event)">
+                                <i class="fa-solid fa-face-sad-tear"></i>
+                            </div>
+                            <div class="reaction-icon reaction-angry" onclick="setReaction(1, 'angry', event)">
+                                <i class="fa-solid fa-face-angry"></i>
+                            </div>
                         </div>
-                        <div class="reaction-icon reaction-haha" onclick="setReaction(1, 'haha')">
-                            <i class="fa-solid fa-face-laugh-squint"></i>
-                        </div>
-                        <div class="reaction-icon reaction-wow" onclick="setReaction(1, 'wow')">
-                            <i class="fa-solid fa-face-surprise"></i>
-                        </div>
-                        <div class="reaction-icon reaction-sad" onclick="setReaction(1, 'sad')">
-                            <i class="fa-solid fa-face-sad-tear"></i>
-                        </div>
-                        <div class="reaction-icon reaction-angry" onclick="setReaction(1, 'angry')">
-                            <i class="fa-solid fa-face-angry"></i>
-                        </div>
+                    </div>
+                    <div class="post-action comment-toggle-button"> <i class="fa-solid fa-comment"></i>
+                        <span>Commenter</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Partager</span>
+                    </div>
+                </div>
+
+                <div class="post-comments" style="display: none;">
+                    <div class="comment-stats">
+                        <span class="comment-count">0 commentaires</span>
+                    </div>
+                    <div class="comment-input-area">
+                        <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                    </div>
+                    <div class="comments-list">
                     </div>
                 </div>
             </div>
+
+
             <div class="post" data-post-id="2">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
@@ -202,36 +217,60 @@
                 </div>
                 <div class="post-content">
                     Il y a un premier coteur au dit : "Bon sang !" puis deux chevques sont élevées. "Il faut
-                    toujours
-                    savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
+                    toujours savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
                 </div>
-                <div class="post-action reaction-options">
-                    <div class="reaction-btn" onclick="toggleReaction(this, 2   )">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <span>J'aime</span>
-                    </div>
-                    <div class="reaction-tooltip">
-                        <div class="reaction-icon reaction-like" onclick="setReaction(2, 'like')">
+                <div class="post-actions">
+                    <div class="post-action reaction-options" data-post-id="1">
+                        <div class="reaction-btn" onclick="handleReactionClick(2, event)"
+                            onmouseenter="handleReactionHover(2)" onmouseleave="hideReactionTooltip(2)">
                             <i class="fa-solid fa-thumbs-up"></i>
+                            <span>J'aime</span>
                         </div>
-                        <div class="reaction-icon reaction-love" onclick="setReaction(2, 'love')">
-                            <i class="fa-solid fa-heart"></i>
+                        <div class="reaction-tooltip">
+                            <div class="reaction-icon reaction-like" onclick="setReaction(2, 'like', event)">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </div>
+                            <div class="reaction-icon reaction-love" onclick="setReaction(2, 'love', event)">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="reaction-icon reaction-haha" onclick="setReaction(2, 'haha', event)">
+                                <i class="fa-solid fa-face-laugh-squint"></i>
+                            </div>
+                            <div class="reaction-icon reaction-wow" onclick="setReaction(2, 'wow', event)">
+                                <i class="fa-solid fa-face-surprise"></i>
+                            </div>
+                            <div class="reaction-icon reaction-sad" onclick="setReaction(2, 'sad', event)">
+                                <i class="fa-solid fa-face-sad-tear"></i>
+                            </div>
+                            <div class="reaction-icon reaction-angry" onclick="setReaction(2, 'angry', event)">
+                                <i class="fa-solid fa-face-angry"></i>
+                            </div>
                         </div>
-                        <div class="reaction-icon reaction-haha" onclick="setReaction(2, 'haha')">
-                            <i class="fa-solid fa-face-laugh-squint"></i>
-                        </div>
-                        <div class="reaction-icon reaction-wow" onclick="setReaction(2, 'wow')">
-                            <i class="fa-solid fa-face-surprise"></i>
-                        </div>
-                        <div class="reaction-icon reaction-sad" onclick="setReaction(2, 'sad')">
-                            <i class="fa-solid fa-face-sad-tear"></i>
-                        </div>
-                        <div class="reaction-icon reaction-angry" onclick="setReaction(2, 'angry')">
-                            <i class="fa-solid fa-face-angry"></i>
-                        </div>
+                    </div>
+                    <div class="post-action comment-toggle-button"> <i class="fa-solid fa-comment"></i>
+                        <span>Commenter</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Partager</span>
+                    </div>
+                </div>
+
+                <div class="post-comments" style="display: none;">
+                    <div class="comment-stats">
+                        <span class="comment-count">0 commentaires</span>
+                    </div>
+                    <div class="comment-input-area">
+                        <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                    </div>
+                    <div class="comments-list">
                     </div>
                 </div>
             </div>
+
+
+
             <div class="post" data-post-id="3">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
@@ -242,36 +281,60 @@
                 </div>
                 <div class="post-content">
                     Il y a un premier coteur au dit : "Bon sang !" puis deux chevques sont élevées. "Il faut
-                    toujours
-                    savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
+                    toujours savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
                 </div>
-                <div class="post-action reaction-options">
-                    <div class="reaction-btn" onclick="toggleReaction(this, 3)">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <span>J'aime</span>
-                    </div>
-                    <div class="reaction-tooltip">
-                        <div class="reaction-icon reaction-like" onclick="setReaction(3, 'like')">
+                <div class="post-actions">
+                    <div class="post-action reaction-options" data-post-id="3">
+                        <div class="reaction-btn" onclick="handleReactionClick(3, event)"
+                            onmouseenter="handleReactionHover(3)" onmouseleave="hideReactionTooltip(3)">
                             <i class="fa-solid fa-thumbs-up"></i>
+                            <span>J'aime</span>
                         </div>
-                        <div class="reaction-icon reaction-love" onclick="setReaction(3, 'love')">
-                            <i class="fa-solid fa-heart"></i>
+                        <div class="reaction-tooltip">
+                            <div class="reaction-icon reaction-like" onclick="setReaction(3, 'like', event)">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </div>
+                            <div class="reaction-icon reaction-love" onclick="setReaction(3, 'love', event)">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="reaction-icon reaction-haha" onclick="setReaction(3, 'haha', event)">
+                                <i class="fa-solid fa-face-laugh-squint"></i>
+                            </div>
+                            <div class="reaction-icon reaction-wow" onclick="setReaction(3, 'wow', event)">
+                                <i class="fa-solid fa-face-surprise"></i>
+                            </div>
+                            <div class="reaction-icon reaction-sad" onclick="setReaction(3, 'sad', event)">
+                                <i class="fa-solid fa-face-sad-tear"></i>
+                            </div>
+                            <div class="reaction-icon reaction-angry" onclick="setReaction(3, 'angry', event)">
+                                <i class="fa-solid fa-face-angry"></i>
+                            </div>
                         </div>
-                        <div class="reaction-icon reaction-haha" onclick="setReaction(3, 'haha')">
-                            <i class="fa-solid fa-face-laugh-squint"></i>
-                        </div>
-                        <div class="reaction-icon reaction-wow" onclick="setReaction(3, 'wow')">
-                            <i class="fa-solid fa-face-surprise"></i>
-                        </div>
-                        <div class="reaction-icon reaction-sad" onclick="setReaction(3, 'sad')">
-                            <i class="fa-solid fa-face-sad-tear"></i>
-                        </div>
-                        <div class="reaction-icon reaction-angry" onclick="setReaction(3, 'angry')">
-                            <i class="fa-solid fa-face-angry"></i>
-                        </div>
+                    </div>
+                    <div class="post-action comment-toggle-button"> <i class="fa-solid fa-comment"></i>
+                        <span>Commenter</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Partager</span>
+                    </div>
+                </div>
+
+                <div class="post-comments" style="display: none;">
+                    <div class="comment-stats">
+                        <span class="comment-count">0 commentaires</span>
+                    </div>
+                    <div class="comment-input-area">
+                        <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                    </div>
+                    <div class="comments-list">
                     </div>
                 </div>
             </div>
+            <!-- Ajoutons quelques posts supplémentaires pour avoir plus de contenu -->
+
+
             <div class="post" data-post-id="4">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
@@ -282,36 +345,60 @@
                 </div>
                 <div class="post-content">
                     Il y a un premier coteur au dit : "Bon sang !" puis deux chevques sont élevées. "Il faut
-                    toujours
-                    savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
+                    toujours savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
                 </div>
-                <div class="post-action reaction-options">
-                    <div class="reaction-btn" onclick="toggleReaction(this, 4)">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <span>J'aime</span>
-                    </div>
-                    <div class="reaction-tooltip">
-                        <div class="reaction-icon reaction-like" onclick="setReaction(4, 'like')">
+                <div class="post-actions">
+                    <div class="post-action reaction-options" data-post-id="1">
+                        <div class="reaction-btn" onclick="handleReactionClick(4, event)"
+                            onmouseenter="handleReactionHover(4)" onmouseleave="hideReactionTooltip(4)">
                             <i class="fa-solid fa-thumbs-up"></i>
+                            <span>J'aime</span>
                         </div>
-                        <div class="reaction-icon reaction-love" onclick="setReaction(4, 'love')">
-                            <i class="fa-solid fa-heart"></i>
+                        <div class="reaction-tooltip">
+                            <div class="reaction-icon reaction-like" onclick="setReaction(4, 'like', event)">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </div>
+                            <div class="reaction-icon reaction-love" onclick="setReaction(4, 'love', event)">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="reaction-icon reaction-haha" onclick="setReaction(4, 'haha', event)">
+                                <i class="fa-solid fa-face-laugh-squint"></i>
+                            </div>
+                            <div class="reaction-icon reaction-wow" onclick="setReaction(4, 'wow', event)">
+                                <i class="fa-solid fa-face-surprise"></i>
+                            </div>
+                            <div class="reaction-icon reaction-sad" onclick="setReaction(4, 'sad', event)">
+                                <i class="fa-solid fa-face-sad-tear"></i>
+                            </div>
+                            <div class="reaction-icon reaction-angry" onclick="setReaction(4, 'angry', event)">
+                                <i class="fa-solid fa-face-angry"></i>
+                            </div>
                         </div>
-                        <div class="reaction-icon reaction-haha" onclick="setReaction(4, 'haha')">
-                            <i class="fa-solid fa-face-laugh-squint"></i>
-                        </div>
-                        <div class="reaction-icon reaction-wow" onclick="setReaction(4, 'wow')">
-                            <i class="fa-solid fa-face-surprise"></i>
-                        </div>
-                        <div class="reaction-icon reaction-sad" onclick="setReaction(4, 'sad')">
-                            <i class="fa-solid fa-face-sad-tear"></i>
-                        </div>
-                        <div class="reaction-icon reaction-angry" onclick="setReaction(4, 'angry')">
-                            <i class="fa-solid fa-face-angry"></i>
-                        </div>
+                    </div>
+                    <div class="post-action comment-toggle-button"> <i class="fa-solid fa-comment"></i>
+                        <span>Commenter</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Partager</span>
+                    </div>
+                </div>
+
+                <div class="post-comments" style="display: none;">
+                    <div class="comment-stats">
+                        <span class="comment-count">0 commentaires</span>
+                    </div>
+                    <div class="comment-input-area">
+                        <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                    </div>
+                    <div class="comments-list">
                     </div>
                 </div>
             </div>
+
+
+
             <div class="post" data-post-id="5">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
@@ -322,83 +409,60 @@
                 </div>
                 <div class="post-content">
                     Il y a un premier coteur au dit : "Bon sang !" puis deux chevques sont élevées. "Il faut
-                    toujours
-                    savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
+                    toujours savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
                 </div>
-                <div class="post-action reaction-options">
-                    <div class="reaction-btn" onclick="toggleReaction(this, 5)">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <span>J'aime</span>
-                    </div>
-                    <div class="reaction-tooltip">
-                        <div class="reaction-icon reaction-like" onclick="setReaction(5, 'like')">
+                <div class="post-actions">
+                    <div class="post-action reaction-options" data-post-id="5">
+                        <div class="reaction-btn" onclick="handleReactionClick(5, event)"
+                            onmouseenter="handleReactionHover(5)" onmouseleave="hideReactionTooltip(5)">
                             <i class="fa-solid fa-thumbs-up"></i>
+                            <span>J'aime</span>
                         </div>
-                        <div class="reaction-icon reaction-love" onclick="setReaction(5, 'love')">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                        <div class="reaction-icon reaction-haha" onclick="setReaction(5, 'haha')">
-                            <i class="fa-solid fa-face-laugh-squint"></i>
-                        </div>
-                        <div class="reaction-icon reaction-wow" onclick="setReaction(5, 'wow')">
-                            <i class="fa-solid fa-face-surprise"></i>
-                        </div>
-                        <div class="reaction-icon reaction-sad" onclick="setReaction(5, 'sad')">
-                            <i class="fa-solid fa-face-sad-tear"></i>
-                        </div>
-                        <div class="reaction-icon reaction-angry" onclick="setReaction(5, 'angry')">
-                            <i class="fa-solid fa-face-angry"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="post" data-post-id="6">
-                <div class="post-header">
-                    <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
-                    <div>
-                        <div class="post-author">Piscide Azanfin</div>
-                        <div class="post-time">Il y a 1 min · <i class="fa-solid fa-earth-americas"></i></div>
-                    </div>
-                </div>
-                <div class="post-content">
-                    Il y a un premier coteur au dit : "Bon sang !" puis deux chevques sont élevées. "Il faut
-                    toujours
-                    savoir là où tu me les mains car le vie m'a pas de bonheur." En voir plus.
-                </div>
-                <div class="post-action reaction-options">
-                    <div class="reaction-btn" onclick="toggleReaction(this, 6)">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <span>J'aime</span>
-                    </div>
-                    <div class="reaction-tooltip">
-                        <div class="reaction-icon reaction-like" onclick="setReaction(6, 'like')">
-                            <i class="fa-solid fa-thumbs-up"></i>
-                        </div>
-                        <div class="reaction-icon reaction-love" onclick="setReaction(6, 'love')">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                        <div class="reaction-icon reaction-haha" onclick="setReaction(6, 'haha')">
-                            <i class="fa-solid fa-face-laugh-squint"></i>
-                        </div>
-                        <div class="reaction-icon reaction-wow" onclick="setReaction(6, 'wow')">
-                            <i class="fa-solid fa-face-surprise"></i>
-                        </div>
-                        <div class="reaction-icon reaction-sad" onclick="setReaction(6, 'sad')">
-                            <i class="fa-solid fa-face-sad-tear"></i>
-                        </div>
-                        <div class="reaction-icon reaction-angry" onclick="setReaction(6, 'angry')">
-                            <i class="fa-solid fa-face-angry"></i>
+                        <div class="reaction-tooltip">
+                            <div class="reaction-icon reaction-like" onclick="setReaction(5, 'like', event)">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            </div>
+                            <div class="reaction-icon reaction-love" onclick="setReaction(5, 'love', event)">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="reaction-icon reaction-haha" onclick="setReaction(5, 'haha', event)">
+                                <i class="fa-solid fa-face-laugh-squint"></i>
+                            </div>
+                            <div class="reaction-icon reaction-wow" onclick="setReaction(5, 'wow', event)">
+                                <i class="fa-solid fa-face-surprise"></i>
+                            </div>
+                            <div class="reaction-icon reaction-sad" onclick="setReaction(5, 'sad', event)">
+                                <i class="fa-solid fa-face-sad-tear"></i>
+                            </div>
+                            <div class="reaction-icon reaction-angry" onclick="setReaction(5, 'angry', event)">
+                                <i class="fa-solid fa-face-angry"></i>
+                            </div>
                         </div>
                     </div>
+                    <div class="post-action comment-toggle-button"> <i class="fa-solid fa-comment"></i>
+                        <span>Commenter</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Partager</span>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Autres posts normaux... -->
+                <div class="post-comments" style="display: none;">
+                    <div class="comment-stats">
+                        <span class="comment-count">0 commentaires</span>
+                    </div>
+                    <div class="comment-input-area">
+                        <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                    </div>
+                    <div class="comments-list">
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Colonne de droite avec contenus sponsorisés -->
         <div class="rightbar">
-            <!-- Contenu sponsorisé 1 -->
             <div class="sponsored-card">
                 <div class="sponsored-label">Sponsorisé</div>
                 <div class="sponsored-content">
@@ -412,7 +476,6 @@
                 </div>
             </div>
 
-            <!-- Invitations -->
             <div class="right-section">
                 <div class="section-header">
                     <h3>Invitations</h3>
@@ -431,7 +494,6 @@
                 </div>
             </div>
 
-            <!-- Anniversaires -->
             <div class="right-section">
                 <div class="section-header">
                     <h3>Anniversaires</h3>
@@ -441,7 +503,6 @@
                 </div>
             </div>
 
-            <!-- Contenu sponsorisé 2 -->
             <div class="sponsored-card">
                 <div class="sponsored-label">Sponsorisé</div>
                 <div class="sponsored-content">
@@ -450,23 +511,316 @@
                 </div>
             </div>
 
-            <!-- Contacts -->
             <div class="right-section">
                 <div class="section-header">
                     <h3>Contacts</h3>
+                    <div class="contacts-icons">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <i class="fa-solid fa-circle icon green"></i>
+
+                <!-- Meta AI Contact -->
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <div class="meta-ai-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
                     <div class="contact-info">
                         <div class="contact-name">Meta AI</div>
+                    </div>
+                    <div class="online-status online"></div>
+                </div>
+
+                <!-- Liste des autres contacts -->
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Oluwa Funmi Layọ̀</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Rebecca BK</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Tâ Marie</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Herrlich Kdj</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Judith Hounsou</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Phoébé Savi</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Rosine Eudoscie Baloïtcha</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Eunice Richy</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status offline"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Déo-gratias Tchedji</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Dari Gomez</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Stéphanie Hounsouкponoп</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Christian Le Fraîcheur</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status offline"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Gisèle Giselas</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Kim Maxence Yngvár</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Jennie Dossou</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status online"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Sènanoudé Mékis</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Profil" class="contact-avatar">
+                        <div class="online-status recent"></div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Mae Lyse Ask</div>
+                        <div class="last-seen">4 min</div>
+                    </div>
+                </div>
+
+                <!-- Sections supplémentaires -->
+                <div class="section-title">Discussions de communauté</div>
+
+                <div class="contact-item messenger-contact group-chat">
+                    <div class="contact-avatar-wrapper">
+                        <div class="group-avatar">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">COD GLOBAL BNS</div>
+                        <div class="group-description">CODM Account BUY&SELL GLOBAL</div>
+                    </div>
+                </div>
+
+                <div class="section-title">Discussions de groupe</div>
+
+                <div class="contact-item messenger-contact group-chat">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Groupe" class="contact-avatar">
+                        <div class="group-badge">52 sem.</div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Les étudiants FAST-MIA</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact group-chat">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Groupe" class="contact-avatar">
+                        <div class="group-badge">1 an</div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">PCT Tle D MAGr Groupe Promotion 2021~2022</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact group-chat">
+                    <div class="contact-avatar-wrapper">
+                        <img src="https://via.placeholder.com/36" alt="Groupe" class="contact-avatar">
+                        <div class="group-badge">1 an</div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">CHRIST GOSPEL TALENT 🔥</div>
+                    </div>
+                </div>
+
+                <div class="contact-item messenger-contact create-group">
+                    <div class="contact-avatar-wrapper">
+                        <div class="create-group-icon">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-name">Créer une discussion de groupe</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Script -->
     <script>
+    // Variables globales pour gérer les réactions des publications
+    let currentReactions = {}; // Pour les réactions des publications
+    let tooltipTimer = null; // Pour les tooltips des publications (publications)
+    let commentHoverTimeout = null; // Pour les tooltips des commentaires
+
+    // Variable pour stocker les réactions des commentaires
+    // Structure: { postId: { commentId: 'reactionType' } }
+    // Initialisation unique et vide, les propriétés seront ajoutées dynamiquement
+    let allCommentReactions = {};
+
+    // Configuration des réactions (utilisée pour les posts et les commentaires)
+    // Cette configuration est définie une seule fois
+    const reactionConfig = {
+        like: {
+            icon: 'fa-thumbs-up',
+            text: "J'aime",
+            color: '#1877f2', // Bleu Facebook
+            class: 'liked' // Classe CSS spécifique pour le post
+        },
+        love: {
+            icon: 'fa-heart',
+            text: "J'adore",
+            color: '#f3425f', // Rouge
+            class: 'loved'
+        },
+        haha: {
+            icon: 'fa-face-laugh-squint',
+            text: "Haha",
+            color: '#f7b928', // Jaune
+            class: 'haha'
+        },
+        wow: {
+            icon: 'fa-face-surprise',
+            text: "Wow",
+            color: '#f7b928', // Jaune
+            class: 'wow'
+        },
+        sad: {
+            icon: 'fa-face-sad-tear',
+            text: "Triste",
+            color: '#f7b928', // Jaune
+            class: 'sad'
+        },
+        angry: {
+            icon: 'fa-face-angry',
+            text: "Grrr",
+            color: '#e9710f', // Orange/Rouge
+            class: 'angry'
+        }
+    };
+
     function toggleVoirPlus(show) {
         const voirPlusSection = document.getElementById("voir-plus");
         const btnVoirPlus = document.getElementById("btn-voir-plus");
@@ -480,150 +834,417 @@
         }
     }
 
-    // Gestion des réactions
-    let currentReactions = {};
+    // Fonctions de gestion des réactions pour les PUBLICATIONS
+    function handleReactionClick(postId, event) {
+        event.stopPropagation();
 
-    function toggleReaction(element, postId) {
-        const tooltip = element.parentElement.querySelector('.reaction-tooltip');
-        tooltip.style.display = tooltip.style.display === 'flex' ? 'none' : 'flex';
+        const current = currentReactions[postId];
+
+        if (!current) {
+            // Premier clic : like par défaut
+            setReaction(postId, 'like', event);
+        } else {
+            // Si il y a déjà une réaction (peu importe laquelle), on la supprime
+            removeReaction(postId);
+        }
     }
 
-    function setReaction(postId, reactionType) {
-        const reactionBtn = document.querySelector(`.post[data-post-id="${postId}"] .reaction-btn`);
-        const iconMap = {
-            like: 'fa-thumbs-up',
-            love: 'fa-heart',
-            haha: 'fa-face-laugh-squint',
-            wow: 'fa-face-surprise',
-            sad: 'fa-face-sad-tear',
-            angry: 'fa-face-angry'
-        };
+    function handleReactionHover(postId) {
+        // Cette fonction gère l'affichage du tooltip de réaction pour les publications
+        clearTimeout(tooltipTimer);
+        const tooltip = document.querySelector(`[data-post-id="${postId}"] .reaction-tooltip`);
 
-        const colorMap = {
-            like: '#1877f2',
-            love: '#f3425f',
-            haha: '#f7b928',
-            wow: '#f7b928',
-            sad: '#f7b928',
-            angry: '#e9710f'
-        };
+        // Cacher tous les autres tooltips ouverts pour éviter les superpositions
+        document.querySelectorAll('.reaction-tooltip').forEach(t => {
+            if (t !== tooltip) {
+                t.classList.remove('show');
+            }
+        });
 
-        // Enregistre la réaction
+        if (tooltip) {
+            tooltipTimer = setTimeout(() => {
+                tooltip.classList.add('show');
+            }, 500); // Délai de 500ms
+        }
+    }
+
+    function hideReactionTooltip(postId) {
+        clearTimeout(tooltipTimer);
+        setTimeout(() => {
+            const tooltip = document.querySelector(`[data-post-id="${postId}"] .reaction-tooltip`);
+            // Masquer le tooltip seulement si la souris n'est pas dessus
+            if (tooltip && !tooltip.matches(':hover')) {
+                tooltip.classList.remove('show');
+            }
+        }, 300); // Court délai pour permettre le déplacement vers les icônes de réaction
+    }
+
+    // showReactionTooltip n'est plus nécessaire car sa logique est intégrée dans handleReactionHover
+    // et setReaction gère déjà la fermeture du tooltip.
+
+    function setReaction(postId, reactionType, event) {
+        event.stopPropagation();
+
+        const reactionBtn = document.querySelector(`[data-post-id="${postId}"] .reaction-btn`);
+        const reactionOptionsContainer = document.querySelector(
+            `[data-post-id="${postId}"] .post-action.reaction-options`); // Le conteneur reaction-options du post
+
+        const config = reactionConfig[reactionType];
+
+        // Supprimer toutes les classes de réaction précédentes du conteneur
+        Object.values(reactionConfig).forEach(r => {
+            if (reactionOptionsContainer) { // S'assurer que le conteneur existe
+                reactionOptionsContainer.classList.remove(r.class);
+            }
+        });
+
+        if (reactionOptionsContainer && config) {
+            reactionOptionsContainer.classList.add(config.class); // Ajouter la nouvelle classe au conteneur principal
+        }
+
+        if (reactionBtn && config) {
+            reactionBtn.innerHTML = `
+                <i class="fa-solid ${config.icon}" style="color: ${config.color}"></i>
+                <span style="color: ${config.color}">${config.text}</span>
+            `;
+        }
+
         currentReactions[postId] = reactionType;
-        localStorage.setItem(`post_${postId}_reaction`, reactionType);
 
-        // Met à jour l'affichage
-        reactionBtn.innerHTML = `<i class="fa-solid ${iconMap[reactionType]}" style="color: ${colorMap[reactionType]}"></i>
-                            <span>${getReactionText(reactionType)}</span>`;
-
-        // Cache le tooltip
-        reactionBtn.parentElement.querySelector('.reaction-tooltip').style.display = 'none';
+        const tooltip = document.querySelector(`[data-post-id="${postId}"] .reaction-tooltip`);
+        if (tooltip) {
+            tooltip.classList.remove('show'); // Cacher le tooltip après la sélection
+        }
     }
 
-    function getReactionText(reactionType) {
-        const texts = {
-            like: "J'aime",
-            love: "J'adore",
-            haha: "Haha",
-            wow: "Wow",
-            sad: "Triste",
-            angry: "Grrr"
+    function removeReaction(postId) {
+        const reactionBtn = document.querySelector(`[data-post-id="${postId}"] .reaction-btn`);
+        const reactionOptionsContainer = document.querySelector(
+            `[data-post-id="${postId}"] .post-action.reaction-options`);
+
+        // Supprimer toutes les classes de réaction du conteneur
+        Object.values(reactionConfig).forEach(r => {
+            if (reactionOptionsContainer) {
+                reactionOptionsContainer.classList.remove(r.class);
+            }
+        });
+
+        if (reactionBtn) {
+            reactionBtn.innerHTML = `
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span>J'aime</span>
+            `;
+            reactionBtn.style.color = '#b0b3b8'; // Remettre la couleur par défaut
+        }
+
+        delete currentReactions[postId];
+    }
+
+    // Fonctions de gestion des réactions pour les COMMENTAIRES
+    let commentTooltipTimer = null; // Timer spécifique aux tooltips des commentaires
+
+    function handleCommentReactionHover(postId, commentId) {
+        clearTimeout(commentTooltipTimer);
+        const commentReactionOptions = document.querySelector(
+            `.comment-reaction-options[data-post-id="${postId}"][data-comment-id="${commentId}"]`);
+        const reactionTooltip = commentReactionOptions ? commentReactionOptions.querySelector('.reaction-tooltip') :
+            null;
+
+        if (reactionTooltip) {
+            commentTooltipTimer = setTimeout(() => {
+                reactionTooltip.classList.add('show'); // Utilise la classe 'show' pour la visibilité
+            }, 300); // Délai de 300ms avant d'afficher
+        }
+    }
+
+    function hideCommentReactionTooltip(postId, commentId) {
+        clearTimeout(commentTooltipTimer);
+        const commentReactionOptions = document.querySelector(
+            `.comment-reaction-options[data-post-id="${postId}"][data-comment-id="${commentId}"]`);
+        const reactionTooltip = commentReactionOptions ? commentReactionOptions.querySelector('.reaction-tooltip') :
+            null;
+        if (reactionTooltip) {
+            reactionTooltip.classList.remove('show'); // Retire la classe 'show' pour masquer
+        }
+    }
+
+    function setCommentReaction(postId, commentId, reactionType, event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation(); // Empêche la propagation de l'événement
+        }
+
+        if (!allCommentReactions[postId]) {
+            allCommentReactions[postId] = {};
+        }
+
+        const currentCommentReaction = allCommentReactions[postId][commentId];
+
+        // Si l'utilisateur clique sur la même réaction, la retirer
+        if (currentCommentReaction === reactionType) {
+            delete allCommentReactions[postId][commentId]; // Supprime la réaction
+        } else {
+            // Sinon, on applique la nouvelle réaction
+            allCommentReactions[postId][commentId] = reactionType;
+        }
+
+        // Re-rendre les commentaires pour mettre à jour l'affichage
+        renderComments(postId);
+
+        // Cacher le tooltip après la sélection
+        hideCommentReactionTooltip(postId, commentId);
+
+        // Sauvegarder les réactions des commentaires (optionnel, si vous utilisez localStorage)
+        // localStorage.setItem('commentReactions', JSON.stringify(allCommentReactions));
+    }
+
+    // Fonctionnalité de commentaire (variables et fonctions déjà fournies)
+    let allComments = {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: []
+    };
+
+    function addComment(postId, author, text, avatarUrl = 'https://via.placeholder.com/30') {
+        if (!allComments[postId]) {
+            allComments[postId] = [];
+        }
+
+        const newComment = {
+            id: Date.now(),
+            author: author,
+            text: text,
+            avatar: avatarUrl,
+            time: "À l'instant"
         };
-        return texts[reactionType] || "J'aime";
+        allComments[postId].push(newComment);
+        renderComments(postId);
     }
 
-    // Au chargement de la page, restaure les réactions
+    function renderComments(postId) {
+        const commentsList = document.querySelector(`[data-post-id="${postId}"] .comments-list`);
+        const commentCountSpan = document.querySelector(`[data-post-id="${postId}"] .comment-count`);
+
+        if (!commentsList) return;
+
+        commentsList.innerHTML = '';
+
+        const comments = allComments[postId] || [];
+        comments.forEach(comment => {
+            const currentReaction = allCommentReactions[postId] && allCommentReactions[postId][comment.id] ?
+                allCommentReactions[postId][comment.id] : 'default';
+
+            let initialIconClass = 'fa-regular fa-thumbs-up';
+            let initialText = "J'aime";
+            let initialBtnColor = '#b0b3b8'; // Couleur par défaut
+
+            if (currentReaction !== 'default' && reactionConfig[currentReaction]) {
+                const config = reactionConfig[currentReaction];
+                initialIconClass = `fa-solid ${config.icon}`;
+                initialText = config.text;
+                initialBtnColor = config.color;
+            }
+
+            const commentItem = document.createElement('div');
+            commentItem.classList.add('comment-item');
+            commentItem.setAttribute('data-comment-id', comment.id);
+
+            commentItem.innerHTML = `
+                <img src="${comment.avatar}" alt="Avatar" class="comment-avatar">
+                <div class="comment-content-and-actions">
+                    <div class="comment-content-wrapper">
+                        <div class="comment-author">${comment.author}</div>
+                        <div class="comment-text">${comment.text}</div>
+                    </div>
+                    <div class="comment-actions-row">
+                        <div class="comment-reaction-options" data-post-id="${postId}" data-comment-id="${comment.id}">
+                            <div class="comment-reaction-btn reaction-${currentReaction}"
+                                 onclick="setCommentReaction(${postId}, ${comment.id}, 'like', event)"
+                                 onmouseenter="handleCommentReactionHover(${postId}, ${comment.id})"
+                                 onmouseleave="hideCommentReactionTooltip(${postId}, ${comment.id})"
+                                 style="color: ${initialBtnColor};">
+                                <i class="${initialIconClass}"></i>
+                                <span>${initialText}</span>
+                            </div>
+                            <div class="reaction-tooltip">
+                                <div class="reaction-icon reaction-like" onclick="setCommentReaction(${postId}, ${comment.id}, 'like', event)">
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                </div>
+                                <div class="reaction-icon reaction-love" onclick="setCommentReaction(${postId}, ${comment.id}, 'love', event)">
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                                <div class="reaction-icon reaction-haha" onclick="setCommentReaction(${postId}, ${comment.id}, 'haha', event)">
+                                    <i class="fa-solid fa-face-laugh-squint"></i>
+                                </div>
+                                <div class="reaction-icon reaction-wow" onclick="setCommentReaction(${postId}, ${comment.id}, 'wow', event)">
+                                    <i class="fa-solid fa-face-surprise"></i>
+                                </div>
+                                <div class="reaction-icon reaction-sad" onclick="setCommentReaction(${postId}, ${comment.id}, 'sad', event)">
+                                    <i class="fa-solid fa-face-sad-tear"></i>
+                                </div>
+                                <div class="reaction-icon reaction-angry" onclick="setCommentReaction(${postId}, ${comment.id}, 'angry', event)">
+                                    <i class="fa-solid fa-face-angry"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="comment-action-link">Répondre</a>
+                        <span class="comment-time">${comment.time}</span>
+                    </div>
+                </div>
+            `;
+            commentsList.appendChild(commentItem);
+        });
+
+        commentCountSpan.textContent = `${comments.length} commentaire${comments.length !== 1 ? 's' : ''}`;
+    }
+
+    // Bloc unique DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.post').forEach(post => {
-            const postId = post.dataset.postId;
-            const savedReaction = localStorage.getItem(`post_${postId}_reaction`);
+        // Écouteur d'événements pour les champs de saisie de commentaire
+        document.querySelectorAll('.comment-input').forEach(input => {
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter' && this.value.trim() !== '') {
+                    event.preventDefault();
+                    const postId = this.closest('.post').dataset.postId;
+                    addComment(postId, 'Votre Nom', this.value.trim(),
+                        'https://via.placeholder.com/30');
+                    this.value = '';
+                }
+            });
+        });
 
-            if (savedReaction) {
-                setReaction(postId, savedReaction);
+        // Rendre les commentaires pour toutes les publications initialement
+        document.querySelectorAll('.post').forEach(postElement => {
+            const postId = postElement.dataset.postId;
+            renderComments(postId); // Rendre les commentaires pour chaque publication
+        });
+
+        // Chargement des réactions sauvegardées au démarrage (posts et commentaires)
+        // if (localStorage.getItem('postReactions')) {
+        //     currentReactions = JSON.parse(localStorage.getItem('postReactions'));
+        // }
+        // if (localStorage.getItem('commentReactions')) {
+        //     allCommentReactions = JSON.parse(localStorage.getItem('commentReactions'));
+        // }
+
+        // Mettre à jour l'affichage des réactions des posts existants au chargement
+        document.querySelectorAll('.post-action.reaction-options').forEach(reactionOptions => {
+            const postId = reactionOptions.dataset.postId;
+            const reactionType = currentReactions[postId];
+            if (reactionType) {
+                const reactionBtn = reactionOptions.querySelector('.reaction-btn');
+                const config = reactionConfig[reactionType];
+                if (config) {
+                    reactionOptions.classList.add(config.class);
+                    reactionBtn.innerHTML = `
+                        <i class="fa-solid ${config.icon}" style="color: ${config.color}"></i>
+                        <span style="color: ${config.color}">${config.text}</span>
+                    `;
+                }
             }
         });
-    });
 
-    // Affichage des commentaires
-    function toggleComments(postId) {
-        const commentsSection = document.getElementById(`comments-${postId}`);
-        commentsSection.classList.toggle('hidden');
-    }
+        // Gérer le clic direct sur le bouton "J'aime" d'un commentaire (sans passer par le tooltip)
+        document.querySelectorAll('.comment-reaction-btn').forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Vérifie si le clic provient directement du bouton et non d'une icône du tooltip
+                // La propagation est déjà gérée par setCommentReaction appelée par onclick dans le HTML
+                // Donc on ne fait rien ici pour le clic direct sur le bouton, car il est géré par l'onclick inline.
+                // Ce bloc est principalement utile si vous retiriez les onclick/onmouseenter/onmouseleave inline.
+                // Étant donné que ces attributs sont déjà dans votre HTML, ce gestionnaire d'événements peut être redondant
+                // ou nécessiter une logique plus complexe pour éviter les doubles déclenchements.
+                // Pour l'instant, je le laisse commenté pour éviter une éventuelle confusion ou double gestion.
+                /*
+                if (event.target === this || this.contains(event.target)) {
+                    const commentReactionOptions = this.closest('.comment-reaction-options');
+                    const postId = commentReactionOptions.dataset.postId;
+                    const commentId = commentReactionOptions.dataset.commentId;
+                    const currentReaction = allCommentReactions[postId] && allCommentReactions[postId][commentId] ?
+                                            allCommentReactions[postId][commentId] : 'none';
 
-    // Ajout de commentaires
-    function addComment(postId) {
-        const commentInput = document.querySelector(`#comments-${postId} .comment-input`);
-        const commentText = commentInput.value.trim();
+                    if (currentReaction === 'none' || currentReaction !== 'like') {
+                        setCommentReaction(postId, commentId, 'like', event);
+                    } else {
+                        setCommentReaction(postId, commentId, 'none', event);
+                    }
+                }
+                */
+            });
+        });
 
-        if (commentText) {
-            const commentsContainer = document.querySelector(`#comments-${postId}`);
-            const newComment = document.createElement('div');
-            newComment.className = 'comment';
-            newComment.innerHTML = `
-            <img src="https://via.placeholder.com/32" alt="Avatar" class="comment-avatar">
-            <div class="comment-content">
-                <div class="comment-author">Vous</div>
-                <div class="comment-text">${commentText}</div>
-            </div>
-        `;
+        // Gérer le survol du tooltip des commentaires pour le maintenir ouvert
+        document.querySelectorAll('.comment-reaction-options .reaction-tooltip').forEach(tooltip => {
+            tooltip.addEventListener('mouseenter', () => {
+                clearTimeout(commentTooltipTimer);
+                tooltip.classList.add('show');
+            });
+            tooltip.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('show');
+            });
+        });
 
-            // Insère avant le formulaire d'ajout
-            const addCommentDiv = commentsContainer.querySelector('.add-comment');
-            commentsContainer.insertBefore(newComment, addCommentDiv);
 
-            // Réinitialise le champ
-            commentInput.value = '';
+        // Gestion des autres interactions (déjà présentes dans votre code)
+        document.querySelectorAll('.confirm-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const contactName = this.closest('.contact-item').querySelector('.contact-name')
+                    .textContent;
+                console.log('Contact confirmé:', contactName);
+                this.textContent = 'Confirmé';
+                this.style.backgroundColor = '#2e89ff';
+            });
+        });
+
+        document.querySelectorAll('.sponsored-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.contact-actions')) {
+                    console.log('Publicité cliquée:', this.querySelector('.sponsored-title')
+                        .textContent);
+                    const link = this.querySelector('.sponsored-link').textContent;
+                    if (link.startsWith('http')) {
+                        window.open(link, '_blank');
+                    } else {
+                        window.open('https://' + link, '_blank');
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.comment-toggle-button').forEach(commentButton => {
+            commentButton.addEventListener('click', function() {
+                const postElement = this.closest('.post');
+                const postCommentsSection = postElement.querySelector('.post-comments');
+
+                if (postCommentsSection) {
+                    if (postCommentsSection.style.display === 'none' || postCommentsSection
+                        .style.display === '') {
+                        postCommentsSection.style.display = 'block';
+                        postCommentsSection.querySelector('.comment-input').focus();
+                    } else {
+                        postCommentsSection.style.display = 'none';
+                    }
+                    const postId = postElement.dataset.postId;
+                    renderComments(postId);
+                }
+            });
+        });
+    }); // Fin du bloc unique DOMContentLoaded
+
+    document.addEventListener('click', function(event) {
+        // Fermer les tooltips des publications si clic ailleurs
+        if (!event.target.closest('.reaction-options')) {
+            document.querySelectorAll('.reaction-tooltip').forEach(tooltip => {
+                tooltip.classList.remove('show');
+            });
         }
-    }
-
-    // Au chargement de la page, restaure les likes
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.post').forEach(post => {
-            const postId = post.dataset.postId;
-            const isLiked = localStorage.getItem(`post_${postId}_liked`) === 'true';
-
-            if (isLiked) {
-                const likeBtn = post.querySelector('.like-btn');
-                likeBtn.classList.add('liked');
-                likeBtn.innerHTML = '<i class="fa-solid fa-thumbs-up"></i><span>J\'aime</span>';
-            }
-        });
-    });
-    // (Vos fonctions existantes peuvent rester les mêmes)
-
-    // Nouvelle fonction pour charger plus de contenu
-    function loadMoreContent() {
-        // Implémentez le chargement supplémentaire de posts ici
-        console.log("Chargement de plus de contenu...");
-    }
-
-    // Écouteur pour le défilement infini
-    window.addEventListener('scroll', function() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
-            loadMoreContent();
+        // Fermer les tooltips des commentaires si clic ailleurs
+        if (!event.target.closest('.comment-reaction-options')) {
+            document.querySelectorAll('.comment-reaction-options .reaction-tooltip').forEach(tooltip => {
+                tooltip.classList.remove('show'); // Utilise classList.remove('show') pour masquer
+            });
         }
-    });
-    // Gestion du clic sur les cartes sponsorisées
-    document.querySelectorAll('.sponsored-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (!e.target.closest('.contact-actions')) {
-                // Enregistrer l'impression/le clic
-                console.log('Publicité cliquée:', this.querySelector('.sponsored-title')
-                    .textContent);
-                // Redirection ou ouverture en nouvelle fenêtre
-                window.open(this.querySelector('.sponsored-link').textContent, '_blank');
-            }
-        });
-    });
-    // Gestion des boutons de contact
-    document.querySelectorAll('.confirm-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const contactName = this.closest('.contact-item').querySelector('.contact-name')
-                .textContent;
-            console.log('Contact confirmé:', contactName);
-            this.textContent = 'Confirmé';
-            this.style.backgroundColor = '#2e89ff';
-        });
     });
     </script>
 </body>
