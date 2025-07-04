@@ -109,41 +109,54 @@
                 </div>
             </div>
 
-            <div class="stories-container">
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Sange Dani</div>
+            <div class="stories-wrapper">
+                <div class="scroll-button left" id="stories-scroll-left">
+                    <i class="fas fa-chevron-left"></i>
                 </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">L'assurance</div>
+
+                <div class="stories-container" id="stories-container">
+                    <div class="story-card">
+                        <img src="https://via.placeholder.com/120x180/ADD8E6/000000?text=Story+1" alt="Story"
+                            style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute; bottom:10px; left:10px; color:white; font-weight:bold;">
+                            Utilisateur 1</div>
+                    </div>
+                    <div class="story-card">
+                        <img src="https://via.placeholder.com/120x180/90EE90/000000?text=Story+2" alt="Story"
+                            style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute; bottom:10px; left:10px; color:white; font-weight:bold;">
+                            Utilisateur 2</div>
+                    </div>
+                    <div class="story-card">
+                        <img src="https://via.placeholder.com/120x180/FFB6C1/000000?text=Story+3" alt="Story"
+                            style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute; bottom:10px; left:10px; color:white; font-weight:bold;">
+                            Utilisateur 3</div>
+                    </div>
+                    <div class="story-card">
+                        <img src="https://via.placeholder.com/120x180/E6E6FA/000000?text=Story+4" alt="Story"
+                            style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute; bottom:10px; left:10px; color:white; font-weight:bold;">
+                            Utilisateur 4</div>
+                    </div>
+                    <div class="story-card">
+                        <img src="https://via.placeholder.com/120x180/DDA0DD/000000?text=Story+5" alt="Story"
+                            style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute; bottom:10px; left:10px; color:white; font-weight:bold;">
+                            Utilisateur 5</div>
+                    </div>
+                    <div class="story-card">
+                        <img src="https://via.placeholder.com/120x180/F08080/000000?text=Story+6" alt="Story"
+                            style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute; bottom:10px; left:10px; color:white; font-weight:bold;">
+                            Utilisateur 6</div>
+                    </div>
                 </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Unité</div>
-                </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Génage</div>
-                </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Unité</div>
-                </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Génage</div>
-                </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Unité</div>
-                </div>
-                <div class="story">
-                    <img src="https://via.placeholder.com/110x200" alt="Story">
-                    <div class="story-author">Génage</div>
+
+                <div class="scroll-button right" id="stories-scroll-right">
+                    <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
-
             <div class="post" data-post-id="1">
                 <div class="post-header">
                     <img src="https://via.placeholder.com/40" alt="Avatar" class="post-avatar">
@@ -199,7 +212,13 @@
                     </div>
                     <div class="comment-input-area">
                         <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
-                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                            <div class="comment-input-options">
+                                <i class="fa-solid fa-camera"></i> <i class="fa-solid fa-microphone"></i> <i
+                                    class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-gif"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="comments-list">
                     </div>
@@ -262,7 +281,13 @@
                     </div>
                     <div class="comment-input-area">
                         <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
-                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                            <div class="comment-input-options">
+                                <i class="fa-solid fa-camera"></i> <i class="fa-solid fa-microphone"></i> <i
+                                    class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-gif"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="comments-list">
                     </div>
@@ -326,7 +351,13 @@
                     </div>
                     <div class="comment-input-area">
                         <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
-                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                            <div class="comment-input-options">
+                                <i class="fa-solid fa-camera"></i> <i class="fa-solid fa-microphone"></i> <i
+                                    class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-gif"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="comments-list">
                     </div>
@@ -390,7 +421,13 @@
                     </div>
                     <div class="comment-input-area">
                         <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
-                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                            <div class="comment-input-options">
+                                <i class="fa-solid fa-camera"></i> <i class="fa-solid fa-microphone"></i> <i
+                                    class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-gif"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="comments-list">
                     </div>
@@ -454,7 +491,13 @@
                     </div>
                     <div class="comment-input-area">
                         <img src="https://via.placeholder.com/30" alt="Votre avatar" class="comment-avatar">
-                        <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" placeholder="Écrivez un commentaire...">
+                            <div class="comment-input-options">
+                                <i class="fa-solid fa-camera"></i> <i class="fa-solid fa-microphone"></i> <i
+                                    class="fa-regular fa-face-smile"></i> <i class="fa-solid fa-gif"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="comments-list">
                     </div>
@@ -1244,6 +1287,53 @@
             document.querySelectorAll('.comment-reaction-options .reaction-tooltip').forEach(tooltip => {
                 tooltip.classList.remove('show'); // Utilise classList.remove('show') pour masquer
             });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const storiesContainer = document.getElementById('stories-container');
+        const scrollLeftBtn = document.getElementById('stories-scroll-left');
+        const scrollRightBtn = document.getElementById('stories-scroll-right');
+
+        if (storiesContainer && scrollLeftBtn && scrollRightBtn) {
+            // Fonction de défilement
+            const scrollStories = (direction) => {
+                const scrollAmount = storiesContainer.clientWidth *
+                    0.8; // Défile  de 80% de la largeur visible
+                if (direction === 'left') {
+                    storiesContainer.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    storiesContainer.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }
+            };
+
+            scrollLeftBtn.addEventListener('click', () => scrollStories('left'));
+            scrollRightBtn.addEventListener('click', () => scrollStories('right'));
+
+            // Optionnel: masquer/afficher les boutons si plus de contenu à défiler
+            const toggleScrollButtons = () => {
+                if (storiesContainer.scrollWidth > storiesContainer.clientWidth) {
+                    // Il y a du contenu à défiler
+                    scrollLeftBtn.style.display = storiesContainer.scrollLeft > 0 ? 'flex' : 'none';
+                    scrollRightBtn.style.display = storiesContainer.scrollLeft < (storiesContainer
+                        .scrollWidth - storiesContainer.clientWidth) ? 'flex' : 'none';
+                } else {
+                    // Pas assez de contenu pour défiler, cacher les boutons
+                    scrollLeftBtn.style.display = 'none';
+                    scrollRightBtn.style.display = 'none';
+                }
+            };
+
+            // Appeler au chargement et lors du défilement
+            toggleScrollButtons();
+            storiesContainer.addEventListener('scroll', toggleScrollButtons);
+            // Appeler aussi si la taille de la fenêtre change
+            window.addEventListener('resize', toggleScrollButtons);
         }
     });
     </script>
