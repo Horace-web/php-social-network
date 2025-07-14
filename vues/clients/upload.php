@@ -1,9 +1,4 @@
 <?php
-$host = "localhost";
-$username = "root";
-$password = "";
-$db = "formulaire";
-
 $mysqli = new mysqli($host, $username, $password, $db);
 if ($mysqli->connect_error) {
     http_response_code(500);
