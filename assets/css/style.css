@@ -433,6 +433,76 @@ body {
     border-radius: 50%;
     font-size: 18px;
 }
+.user-avatar {
+    width: 30px; /* Définissez une largeur */
+    height: 30px; /* Définissez une hauteur identique à la largeur pour un cercle parfait */
+    border-radius: 50%; /* Crée la forme circulaire */
+    object-fit: cover; /* Important ! Règle la façon dont l'image remplit le conteneur */
+}
+/* Styles pour la section de droite de la Topbar */
+.topbar .right {
+    display: flex; /* Utilise Flexbox */
+    align-items: center; /* Aligne les éléments verticalement au centre */
+    /* Si vous voulez un espacement uniforme entre les éléments, vous pouvez utiliser 'gap' pour CSS moderne */
+    /* gap: 8px; */
+}
+
+/* Styles pour les icônes de menu (par ex. grille, messagerie, cloche) */
+.topbar .right .menu-icon {
+    width: 40px; /* Largeur fixe */
+    height: 40px; /* Hauteur fixe */
+    border-radius: 50%; /* Rend le conteneur circulaire */
+    background-color: #3a3b3c; /* Couleur de fond (le gris foncé de Facebook) */
+    display: flex; /* Utilise Flexbox pour centrer l'icône à l'intérieur */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-left: 8px; /* Espace à gauche par rapport à l'élément précédent */
+}
+
+.topbar .right .menu-icon:hover {
+    background-color: #4e4f50; /* Couleur de fond au survol */
+}
+
+/* Taille et couleur des icônes à l'intérieur des menu-icon */
+.topbar .right .menu-icon i {
+    font-size: 1.2rem; /* Ajustez la taille de l'icône si elle ne semble pas centrée */
+    color: #e4e6eb; /* Couleur des icônes */
+}
+
+/* Styles pour le lien de profil utilisateur dans la Topbar */
+.topbar .right .topbar-profile-link {
+    width: 40px; /* Largeur fixe, identique aux menu-icon */
+    height: 40px; /* Hauteur fixe, identique aux menu-icon */
+    border-radius: 50%; /* Rend le conteneur circulaire */
+    background-color: #3a3b3c; /* Couleur de fond, identique aux menu-icon */
+    display: flex; /* Utilise Flexbox pour centrer l'avatar à l'intérieur */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    cursor: pointer;
+    text-decoration: none; /* Supprime le soulignement du lien */
+    margin-left: 8px; /* Espace à gauche, identique aux menu-icon */
+    transition: background-color 0.2s;
+}
+
+.topbar .right .topbar-profile-link:hover {
+    background-color: #4e4f50; /* Couleur de fond au survol */
+}
+
+/* Styles de l'image d'avatar à l'intérieur du lien de profil */
+.topbar .right .topbar-user-avatar {
+    width: 32px; /* L'image est légèrement plus petite que son conteneur (40px) pour créer un petit "padding" visuel */
+    height: 32px;
+    border-radius: 50%; /* Rend l'avatar rond */
+    object-fit: cover; /* Assure que l'image remplit le cercle sans déformation */
+    border: 2px solid transparent; /* Bordure transparente par défaut (peut être activée au survol) */
+    transition: border-color 0.2s; /* Transition pour la bordure */
+}
+
+.topbar .right .topbar-profile-link:hover .topbar-user-avatar {
+    border-color: rgba(255, 255, 255, 0.3); /* Bordure blanche subtile au survol */
+}
 
 .container {
     display: flex;
@@ -551,20 +621,12 @@ body {
     /* Padding intérieur */
 }
 
-/* Supprimez la classe .right-section ou fusionnez-la avec .rightbar */
-
+/* ANCIEN CSS CONSERVÉ (sauf avatar) */
 .post-header {
     display: flex;
     align-items: center;
+    gap: 10px;
     margin-bottom: 12px;
-}
-
-.post-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
 }
 
 .post-author {
@@ -575,7 +637,6 @@ body {
 .post-time {
     color: #b0b3b8;
     font-size: 12px;
-    margin-top: 2px;
 }
 
 .post-image {
@@ -626,6 +687,42 @@ body {
     margin-right: 5px;
 }
 
+.post-avatar-container {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0; /* Empêche le rétrécissement */
+}
+
+.post-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.post-avatar-img {
+   max-width: none; /* Désactive toute contrainte de ratio */
+  height: 100%; /* Remplit la hauteur du cercle */
+  width: auto; /* Largeur ajustée proportionnellement */
+  object-fit: cover; /* Coupe les bords excédentaires */
+  object-position: center;
+}
+
+/* Anneau bleu optionnel */
+.post-avatar-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #1877f2;
+  box-sizing: border-box;
+  pointer-events: none;
+}
 /* États des réactions */
 .post-action.liked {
     color: #1877f2;
@@ -885,7 +982,6 @@ body {
     /* S'assure que l'icône reste jaune */
 }
 /* styles.css */
-
 .stories-wrapper {
     position: relative;
     margin: 20px auto;
@@ -925,10 +1021,11 @@ body {
     background-color: #3a3b3c;
     border-radius: 10px;
     overflow: hidden;
-    position: relative;
+    position: relative; /* TRÈS IMPORTANT pour le positionnement absolu des éléments internes */
     cursor: pointer;
     flex-shrink: 0; /* TRÈS IMPORTANT : Empêche la carte de rétrécir */
-    transition: transform 0.2s ease-in-out; 
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Ajouté pour consistance avec hover */
 }
 
 .story-card:hover {
@@ -965,6 +1062,131 @@ body {
 
 .scroll-button.right {
     right: 10px;
+}
+
+/* NOUVEAUX STYLES POUR LES ÉLÉMENTS INTERNES DE LA STORY-CARD */
+
+/* Style de l'image de fond de la story (le grand aperçu) */
+.story-background-img {
+    width: 100%; /* L'image remplit toute la largeur de la carte */
+    height: 100%; /* L'image remplit toute la hauteur de la carte */
+    object-fit: cover; /* Recadre l'image pour qu'elle couvre entièrement la zone sans être déformée */
+    position: absolute; /* Positionne l'image par rapport à la story-card */
+    top: 0;
+    left: 0;
+    z-index: 1; /* S'assure qu'elle est en dessous des autres éléments */
+}
+
+/* Style de la photo de profil de l'utilisateur (le petit cercle dans le coin) */
+.story-profile-pic {
+    width: 32px; /* Taille de la photo de profil (ex: 32x32 pixels) */
+    height: 32px; /* Doit être égale à la largeur pour un cercle parfait */
+    border-radius: 50%; /* Transforme l'image en cercle */
+    object-fit: cover; /* Recadre l'image pour qu'elle remplisse parfaitement le cercle */
+    position: absolute; /* Positionne cette image par rapport à la story-card */
+    top: 10px; /* Décalage de 10px du haut */
+    left: 10px; /* Décalage de 10px de la gauche */
+    border: 2px solid #1877f2; /* Bordure bleue autour de la photo de profil */
+    z-index: 2; /* S'assure qu'elle est au-dessus de l'image de fond */
+}
+
+/* Style du nom de l'utilisateur dans la story-card */
+.story-user-name {
+    position: absolute; /* Positionne le nom par rapport à la story-card */
+    bottom: 10px; /* Décalage de 10px du bas */
+    left: 10px; /* Décalage de 10px de la gauche */
+    color: white; /* Couleur du texte */
+    font-weight: bold;
+    font-size: 13px;
+    z-index: 2; /* S'assure qu'il est au-dessus de l'image de fond */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Améliore la lisibilité sur des fonds variés */
+}
+
+/* Assurez-vous d'avoir aussi ces styles pour vos avatars standards ailleurs si ce n'est pas déjà fait */
+.user-avatar, .post-avatar, .comment-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-avatar { /* pour l'avatar dans la topbar */
+    width: 30px;
+    height: 30px;
+}
+.post-avatar { /* pour l'avatar dans les posts */
+    width: 40px;
+    height: 40px;
+}
+.comment-avatar { /* pour l'avatar dans les commentaires */
+    width: 30px;
+    height: 30px;
+}
+
+/* STYLES MIS À JOUR POUR LES ÉLÉMENTS INTERNES DE LA STORY-CARD */
+
+/* Appliquez ces styles à la fois aux images et aux vidéos de fond de story */
+.story-background-media {
+    width: 100%; /* L'élément remplit toute la largeur de la carte */
+    height: 100%; /* L'élément remplit toute la hauteur de la carte */
+    object-fit: cover; /* Recadre l'élément pour qu'il couvre entièrement la zone sans être déformée */
+    position: absolute; /* Positionne l'élément par rapport à la story-card */
+    top: 0;
+    left: 0;
+    z-index: 1; /* S'assure qu'il est en dessous des autres éléments */
+}
+
+/* Ajoute un léger dégradé par-dessus l'image/vidéo pour améliorer la lisibilité du texte/profil */
+.story-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 1.5; /* Entre le média (1) et le texte/profil (2) */
+    border-radius: 10px; /* S'assure que le dégradé respecte les coins arrondis de la carte */
+}
+
+/* Style de la photo de profil de l'utilisateur (le petit cercle dans le coin) */
+.story-profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border: 2px solid #1877f2;
+    z-index: 2; /* Au-dessus du média et du dégradé */
+}
+
+/* Style du nom de l'utilisateur dans la story-card */
+.story-user-name {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    z-index: 2; /* Au-dessus du média et du dégradé */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Styles pour les avatars génériques (topbar, posts, commentaires) */
+.user-avatar, .post-avatar, .comment-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-avatar {
+    width: 30px;
+    height: 30px;
+}
+.post-avatar {
+    width: 40px;
+    height: 40px;
+}
+.comment-avatar {
+    width: 30px;
+    height: 30px;
 }
 /* IMPORTANT: Exclure les tooltips des transitions globales */
 button,
@@ -1694,4 +1916,442 @@ i[onclick]:hover,
 .comment-time {
     color: #b0b3b8;
     font-size: 12px;
+}
+
+/* Section globale des Réels */
+.reels-section {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.reels-section .section-title {
+    margin-left: 20px; /* Aligner avec le padding du container */
+    margin-bottom: 15px;
+    color: #e4e6eb; /* Couleur du texte */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Wrapper pour le défilement horizontal des Réels */
+.reels-wrapper {
+    position: relative;
+    margin: 0 auto; /* Centre le wrapper */
+    width: 600px; /* Adaptez à la largeur de votre fil d'actu */
+    max-width: 100%;
+    overflow: hidden; /* Cache les flèches si elles débordent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reels-container {
+    display: flex;
+    gap: 15px; /* Espacement entre les cartes de Réels */
+    padding: 10px 0;
+    overflow-x: hidden; /* Cache le défilement natif */
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.reels-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Styles de chaque carte de Reel */
+.reel-card {
+    min-width: 200px; /* Largeur d'une carte de Reel */
+    height: 350px; /* Hauteur d'une carte de Reel (format vertical) */
+    background-color: #242526; /* Couleur de fond */
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* Indispensable pour positionner les éléments internes */
+    flex-shrink: 0; /* Empêche le rétrécissement */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.reel-card:hover {
+    transform: scale(1.02); /* Léger zoom au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Style de la vidéo du Reel */
+.reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre la vidéo pour remplir la carte */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* En dessous des autres éléments */
+}
+
+/* Overlay pour améliorer la lisibilité du texte sur la vidéo */
+.reel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 100%);
+    z-index: 2; /* Au-dessus de la vidéo, en dessous du contenu */
+    border-radius: 10px; /* Pour respecter les bords arrondis de la carte */
+}
+
+/* Conteneur pour le texte et les éléments interactifs du Reel */
+.reel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    color: white;
+    z-index: 3; /* Au-dessus de l'overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%; /* S'étend sur toute la hauteur pour que bottom 0 fonctionne */
+}
+
+.reel-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reel-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1877f2; /* Bordure bleue */
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.reel-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.reel-user-name {
+    font-weight: bold;
+    font-size: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.reel-follow-btn {
+    background-color: transparent;
+    color: #1877f2; /* Couleur bleue typique de Facebook */
+    border: 1px solid #1877f2;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.2s;
+    align-self: flex-start; /* Aligner avec le texte */
+}
+
+.reel-follow-btn:hover {
+    background-color: rgba(24, 119, 242, 0.2);
+}
+
+.reel-description {
+    font-size: 14px;
+    margin-top: auto; /* Pousse la description vers le bas */
+    margin-bottom: 15px; /* Espace avant les actions */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limite à 3 lignes */
+    -webkit-box-orient: vertical;
+}
+
+/* Actions du Reel (j'aime, commentaire, partager) */
+.reel-actions {
+    position: absolute;
+    right: 10px; /* Positionnement à droite */
+    bottom: 15px; /* Aligner avec le contenu du bas */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre les icônes */
+    color: white;
+    z-index: 3;
+    text-align: center;
+}
+
+.reel-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+.reel-action-item i {
+    font-size: 22px;
+    margin-bottom: 3px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.reel-action-item span {
+    font-size: 12px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Styles pour les boutons de navigation des Réels (réutilisation des .scroll-button existants) */
+.reels-wrapper .scroll-button {
+    top: 45%; /* Centre verticalement les boutons par rapport au wrapper des réels */
+}
+
+/* Styles pour la section "Créer une publication" */
+.create-post {
+    background-color: #242526;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #3a3b3c;
+    border-radius: 50px; /* Pour donner l'apparence d'un champ de texte arrondi */
+    cursor: pointer; /* Indique que c'est cliquable */
+    margin-bottom: 15px;
+    transition: background-color 0.2s;
+}
+
+.post-input-container:hover {
+    background-color: #4e4f50; /* Légère modification au survol */
+}
+
+.post-input-container .post-avatar { /* Réutiliser la classe post-avatar existante */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.post-placeholder {
+    flex-grow: 1; /* Prend l'espace restant */
+    color: #b0b3b8; /* Couleur du texte placeholder */
+    font-size: 15px;
+    padding: 5px 0; /* Un peu de padding interne */
+}
+
+.post-actions-quick {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid #3e4042; /* Ligne de séparation */
+}
+
+.post-actions-quick .action-button {
+    background: none;
+    border: none;
+    color: #b0b3b8;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.post-actions-quick .action-button:hover {
+    background-color: #3a3b3c;
+    color: #e4e6eb;
+}
+
+.post-actions-quick .action-button i {
+    font-size: 18px;
+}
+
+/* Styles pour la Fenêtre Modale */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste en place même en scrollant */
+    z-index: 1001; /* Doit être au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permet le défilement si le contenu est trop grand */
+    background-color: rgba(0, 0, 0, 0.7); /* Fond noir semi-transparent */
+    display: flex; /* Utilisation de flexbox pour centrer */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #242526;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px; /* Largeur maximale de la modale */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    color: #e4e6eb;
+}
+
+.close-button {
+    color: #b0b3b8;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #e4e6eb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.modal-divider {
+    border-top: 1px solid #3e4042;
+    margin-bottom: 20px;
+}
+
+.modal-header-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header-user .post-avatar { /* Réutiliser la classe post-avatar */
+    width: 50px; /* Un peu plus grand dans la modale */
+    height: 50px;
+    margin-right: 10px;
+}
+
+.modal-username {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.modal-textarea {
+    width: 100%;
+    min-height: 150px; /* Hauteur minimale pour le champ de texte */
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    color: #e4e6eb;
+    font-size: 16px;
+    resize: vertical; /* Permet le redimensionnement vertical par l'utilisateur */
+    box-sizing: border-box; /* Inclut padding et border dans la largeur/hauteur */
+}
+
+.modal-textarea::placeholder {
+    color: #b0b3b8;
+}
+
+.modal-media-upload {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 1px dashed #3e4042;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #3a3b3c;
+    color: #1877f2; /* Bleu Facebook */
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.upload-button:hover {
+    background-color: #4e4f50;
+}
+
+.upload-button i {
+    font-size: 18px;
+}
+
+.media-preview {
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.media-preview img, .media-preview video {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    object-fit: contain; /* Pour ne pas couper l'image/vidéo dans l'aperçu */
+}
+
+
+.publish-button {
+    width: 100%;
+    background-color: #1877f2; /* Bleu Facebook */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.publish-button:hover {
+    background-color: #166fe5; /* Bleu un peu plus foncé au survol */
+}
+
+/* Couleurs spécifiques pour les icônes dans les boutons rapides de publication */
+.post-actions-quick .action-button i.red {
+    color: #f02849; /* Rouge vif, typique pour "Vidéo en direct" */
+}
+
+.post-actions-quick .action-button i.green {
+    color: #42b72a; /* Vert vif, typique pour "Photo/Vidéo" */
+}
+
+.post-actions-quick .action-button i.blue-reel {
+    color: #1877f2; /* Bleu vif, typique pour "Reel" */
+}
+
+/*/* Correction agressive pour alignement des icônes Font Awesome dans la topbar */
+.topbar .right .menu-icon i {
+    display: block; /* S'assure que l'icône se comporte comme un bloc */
+    position: relative; /* Pour positionner l'icône si nécessaire */
+    top: 1px; /* Ajustement vertical très léger, à tester. Peut-être 0px, -1px, 2px. */
+    line-height: 1; /* Supprime toute influence du line-height */
 }
