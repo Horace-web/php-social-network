@@ -1,12 +1,472 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/php-social-network/assets/css/style.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f0f2f5;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .messenger-launcher {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #4267B2, #898F9C);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1001;
+        border: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .messenger-launcher:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .messenger-launcher:active {
+        transform: translateY(1px);
+    }
+
+    .messenger-dropdown {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        width: 380px;
+        height: 540px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 1000;
+        border: 1px solid #e0e0e0;
+    }
+
+    .messenger-dropdown.active {
+        display: flex;
+        flex-direction: column;
+        animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .messenger-header {
+        background: linear-gradient(135deg, #4267B2, #898F9C);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 15px;
+    }
+
+    .header-actions button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        opacity: 0.9;
+        transition: opacity 0.2s;
+    }
+
+    .header-actions button:hover {
+        opacity: 1;
+    }
+
+    .messenger-search {
+        padding: 12px;
+        background-color: #f5f6f8;
+        border-bottom: 1px solid #e4e6eb;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 20px;
+        padding: 8px 15px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-container input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        padding: 4px;
+        background: transparent;
+    }
+
+    .search-container i {
+        color: #65676B;
+        margin-right: 8px;
+    }
+
+    .messenger-filters {
+        display: flex;
+        justify-content: space-around;
+        padding: 8px 0;
+        background-color: #f5f6f8;
+        border-bottom: 1px solid #e4e6eb;
+    }
+
+    .filter {
+        border: none;
+        background: none;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 20px;
+        transition: all 0.2s;
+        color: #65676B;
+    }
+
+    .filter.active,
+    .filter:hover {
+        background-color: #e4e6eb;
+        color: #4267B2;
+    }
+
+    .discussion-list {
+        flex: 1;
+        overflow-y: auto;
+        background-color: #fff;
+    }
+
+    .discussion {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        cursor: pointer;
+        border-bottom: 1px solid #f0f2f5;
+        transition: background-color 0.2s;
+    }
+
+    .discussion:hover {
+        background-color: #f5f6f8;
+    }
+
+    .discussion.active {
+        background-color: #e7f3ff;
+    }
+
+    .discussion-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #e4e6eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #4267B2;
+        font-size: 20px;
+        position: relative;
+    }
+
+    .discussion-avatar.online::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        background-color: #31A24C;
+        border: 2px solid white;
+        border-radius: 50%;
+    }
+
+    .discussion-info {
+        flex: 1;
+    }
+
+    .discussion-name {
+        font-weight: 600;
+        color: #050505;
+        margin-bottom: 4px;
+    }
+
+    .discussion-last-message {
+        font-size: 13px;
+        color: #65676B;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 220px;
+    }
+
+    .discussion-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .discussion-time {
+        font-size: 12px;
+        color: #65676B;
+        margin-bottom: 5px;
+    }
+
+    .unread-count {
+        background-color: #4267B2;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message-area {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        background-color: #f0f2f5;
+        border-top: 1px solid #ddd;
+    }
+
+    .message-area.active {
+        display: flex;
+    }
+
+    .message-header {
+        background-color: white;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid #e4e6eb;
+    }
+
+    .back-button {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: #4267B2;
+    }
+
+    .message-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .message {
+        padding: 10px 14px;
+        border-radius: 18px;
+        max-width: 75%;
+        position: relative;
+        animation: messageAppear 0.2s ease-out;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes messageAppear {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .sent {
+        background-color: #4267B2;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+    }
+
+    .received {
+        background-color: #e4e6eb;
+        color: #050505;
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+    }
+
+    .message-time {
+        font-size: 10px;
+        margin-top: 4px;
+        text-align: right;
+        opacity: 0.8;
+    }
+
+    .input-area {
+        display: flex;
+        padding: 12px 16px;
+        background-color: white;
+        border-top: 1px solid #e4e6eb;
+        gap: 8px;
+    }
+
+    .input-area input {
+        flex: 1;
+        padding: 10px 16px;
+        border-radius: 20px;
+        border: 1px solid #e4e6eb;
+        outline: none;
+        font-size: 14px;
+        transition: border-color 0.2s;
+    }
+
+    .input-area input:focus {
+        border-color: #4267B2;
+    }
+
+    .input-area button {
+        background-color: #4267B2;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.2s;
+    }
+
+    .input-area button:hover {
+        background-color: #365899;
+    }
+
+    .no-discussions {
+        text-align: center;
+        padding: 30px;
+        color: #65676B;
+    }
+
+    .discussion-list-title {
+        padding: 12px 16px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #65676B;
+        background-color: #f5f6f8;
+        border-bottom: 1px solid #e4e6eb;
+    }
+
+    .typing-indicator {
+        background-color: #e4e6eb;
+        color: #050505;
+        align-self: flex-start;
+        border-radius: 18px;
+        padding: 10px 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        max-width: 120px;
+        border-bottom-left-radius: 4px;
+    }
+
+    .typing-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #65676B;
+        border-radius: 50%;
+        animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typingAnimation {
+
+        0%,
+        60%,
+        100% {
+            transform: translateY(0);
+        }
+
+        30% {
+            transform: translateY(-4px);
+        }
+    }
+
+    .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+        color: #65676B;
+    }
+
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        color: #4267B2;
+    }
+
+    .empty-state h3 {
+        margin-bottom: 8px;
+        color: #050505;
+    }
+    </style>
     <title>Messenger Clone</title>
 
 </head>
+
 <body>
     <!-- Bouton Messenger -->
     <button id="open-messenger" class="messenger-launcher">
@@ -56,11 +516,11 @@
                     <div class="discussion-last-message" id="current-chat-status">En ligne</div>
                 </div>
             </div>
-            
+
             <div class="message-content" id="message-content">
                 <!-- Messages chargés dynamiquement -->
             </div>
-            
+
             <div class="input-area">
                 <input type="text" id="message-input" placeholder="Tapez votre message...">
                 <button id="send-button">Envoyer</button>
@@ -68,280 +528,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Éléments DOM
-            const messenger = document.getElementById('messenger');
-            const openButton = document.getElementById('open-messenger');
-            const discussionList = document.getElementById('discussion-list');
-            const messageArea = document.getElementById('message-area');
-            const messageContent = document.getElementById('message-content');
-            const messageInput = document.getElementById('message-input');
-            const sendButton = document.getElementById('send-button');
-            const backButton = document.getElementById('back-button');
-            const currentChatName = document.getElementById('current-chat-name');
-            const currentChatAvatar = document.getElementById('current-chat-avatar');
-            const currentChatStatus = document.getElementById('current-chat-status');
-            const searchInput = document.getElementById('search-input');
-            
-            // Données simulées
-            const discussions = [
-                { 
-                    id: 1, 
-                    user_id: 2, 
-                    name: "Alice", 
-                    last_message: "Salut ça va ?", 
-                    time: "10:30", 
-                    unread: 2,
-                    isOnline: true,
-                    avatar: "A"
-                },
-                { 
-                    id: 2, 
-                    user_id: 3, 
-                    name: "Bob", 
-                    last_message: "Dispo demain ?", 
-                    time: "Hier", 
-                    unread: 0,
-                    isOnline: false,
-                    avatar: "B"
-                },
-                { 
-                    id: 3, 
-                    user_id: 4, 
-                    name: "Charlie", 
-                    last_message: "J'ai reçu ton document", 
-                    time: "Lundi", 
-                    unread: 1,
-                    isOnline: true,
-                    avatar: "C"
-                },
-                { 
-                    id: 4, 
-                    user_id: 5, 
-                    name: "Diana", 
-                    last_message: "On se voit à 18h", 
-                    time: "Dimanche", 
-                    unread: 0,
-                    isOnline: true,
-                    avatar: "D"
-                }
-            ];
-            
-            const messages = {
-                2: [
-                    { id: 1, sender_id: 2, content: "Salut !", time: "10:25", sent: false },
-                    { id: 2, sender_id: 1, content: "Bonjour Alice !", time: "10:26", sent: true },
-                    { id: 3, sender_id: 2, content: "Comment vas-tu aujourd'hui ?", time: "10:27", sent: false },
-                    { id: 4, sender_id: 1, content: "Très bien, merci ! Et toi ?", time: "10:28", sent: true },
-                    { id: 5, sender_id: 2, content: "Super aussi, merci de demander.", time: "10:30", sent: false }
-                ],
-                3: [
-                    { id: 1, sender_id: 1, content: "Salut Bob !", time: "09:15", sent: true },
-                    { id: 2, sender_id: 3, content: "Hey ! Dispo demain pour une réunion ?", time: "09:16", sent: false },
-                    { id: 3, sender_id: 1, content: "Oui, à quelle heure ?", time: "09:18", sent: true }
-                ],
-                4: [
-                    { id: 1, sender_id: 4, content: "Bonjour ! J'ai reçu ton document", time: "14:45", sent: false },
-                    { id: 2, sender_id: 1, content: "Parfait, merci !", time: "14:50", sent: true }
-                ],
-                5: [
-                    { id: 1, sender_id: 1, content: "Salut Diana !", time: "16:20", sent: true },
-                    { id: 2, sender_id: 5, content: "Coucou ! On se voit à 18h ?", time: "16:22", sent: false },
-                    { id: 3, sender_id: 1, content: "Oui, c'est noté !", time: "16:23", sent: true }
-                ]
-            };
-            
-            // Variables d'état
-            let currentChatId = null;
-            let currentUserId = 1; // ID de l'utilisateur actuel
-            
-            // Toggle affichage du messenger
-            openButton.addEventListener('click', () => {
-                messenger.classList.toggle('active');
-                if (messenger.classList.contains('active')) {
-                    loadDiscussions();
-                }
-            });
-            
-            // Charger les discussions
-            function loadDiscussions() {
-                discussionList.innerHTML = '<div class="discussion-list-title">Messages</div>';
-                
-                if (discussions.length === 0) {
-                    discussionList.innerHTML += `
-                        <div class="empty-state">
-                            <i>💬</i>
-                            <h3>Aucune discussion</h3>
-                            <p>Commencez une nouvelle conversation</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                discussions.forEach(discussion => {
-                    const discussionEl = document.createElement('div');
-                    discussionEl.className = 'discussion';
-                    discussionEl.dataset.id = discussion.id;
-                    
-                    discussionEl.innerHTML = `
-                        <div class="discussion-avatar ${discussion.isOnline ? 'online' : ''}">${discussion.avatar}</div>
-                        <div class="discussion-info">
-                            <div class="discussion-name">${discussion.name}</div>
-                            <div class="discussion-last-message">${discussion.last_message}</div>
-                        </div>
-                        <div class="discussion-meta">
-                            <div class="discussion-time">${discussion.time}</div>
-                            ${discussion.unread > 0 ? `<div class="unread-count">${discussion.unread}</div>` : ''}
-                        </div>
-                    `;
-                    
-                    discussionEl.addEventListener('click', () => {
-                        openChat(discussion);
-                    });
-                    
-                    discussionList.appendChild(discussionEl);
-                });
-            }
-            
-            // Ouvrir une conversation
-            function openChat(discussion) {
-                currentChatId = discussion.user_id;
-                
-                // Mettre à jour l'en-tête de la conversation
-                currentChatName.textContent = discussion.name;
-                currentChatAvatar.textContent = discussion.avatar;
-                currentChatStatus.textContent = discussion.isOnline ? "En ligne" : "Hors ligne";
-                
-                // Activer la zone de message
-                messageArea.classList.add('active');
-                
-                // Charger les messages
-                loadMessages();
-                
-                // Marquer la discussion comme active
-                document.querySelectorAll('.discussion').forEach(el => {
-                    el.classList.remove('active');
-                });
-                document.querySelector(`.discussion[data-id="${discussion.id}"]`).classList.add('active');
-            }
-            
-            // Charger les messages d'une conversation
-            function loadMessages() {
-                messageContent.innerHTML = '';
-                
-                if (messages[currentChatId] && messages[currentChatId].length > 0) {
-                    messages[currentChatId].forEach(msg => {
-                        addMessageToChat(msg);
-                    });
-                    
-                    // Faire défiler vers le bas
-                    messageContent.scrollTop = messageContent.scrollHeight;
-                } else {
-                    messageContent.innerHTML = `
-                        <div class="empty-state">
-                            <i>💬</i>
-                            <h3>Aucun message</h3>
-                            <p>Envoyez votre premier message</p>
-                        </div>
-                    `;
-                }
-            }
-            
-            // Ajouter un message à la conversation
-            function addMessageToChat(message) {
-                const messageEl = document.createElement('div');
-                messageEl.className = `message ${message.sender_id === currentUserId ? 'sent' : 'received'}`;
-                
-                messageEl.innerHTML = `
-                    ${message.content}
-                    <div class="message-time">${message.time}</div>
-                `;
-                
-                messageContent.appendChild(messageEl);
-                
-                // Faire défiler vers le bas
-                messageContent.scrollTop = messageContent.scrollHeight;
-            }
-            
-            // Envoyer un message
-            function sendMessage() {
-                const content = messageInput.value.trim();
-                if (!content || !currentChatId) return;
-                
-                // Créer un nouveau message
-                const newMessage = {
-                    id: Date.now(),
-                    sender_id: currentUserId,
-                    content: content,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    sent: true
-                };
-                
-                // Ajouter le message à l'interface
-                addMessageToChat(newMessage);
-                
-                // Simuler une réponse après un délai
-                setTimeout(() => {
-                    const responses = [
-                        "Merci pour ton message !",
-                        "Je te réponds dans quelques instants.",
-                        "C'est intéressant, je vais y réfléchir.",
-                        "Je suis occupé pour le moment, je te réponds plus tard."
-                    ];
-                    
-                    const responseMessage = {
-                        id: Date.now(),
-                        sender_id: currentChatId,
-                        content: responses[Math.floor(Math.random() * responses.length)],
-                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                        sent: false
-                    };
-                    
-                    addMessageToChat(responseMessage);
-                }, 2000);
-                
-                // Réinitialiser le champ de saisie
-                messageInput.value = '';
-            }
-            
-            // Gestion des événements
-            sendButton.addEventListener('click', sendMessage);
-            
-            messageInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            backButton.addEventListener('click', () => {
-                messageArea.classList.remove('active');
-                currentChatId = null;
-                document.querySelectorAll('.discussion').forEach(el => {
-                    el.classList.remove('active');
-                });
-            });
-            
-            // Filtre de recherche
-            searchInput.addEventListener('input', () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                
-                discussions.forEach(discussion => {
-                    const el = document.querySelector(`.discussion[data-id="${discussion.id}"]`);
-                    if (!el) return;
-                    
-                    if (discussion.name.toLowerCase().includes(searchTerm) || 
-                        discussion.last_message.toLowerCase().includes(searchTerm)) {
-                        el.style.display = 'flex';
-                    } else {
-                        el.style.display = 'none';
-                    }
-                });
-            });
-            
-            // Initialisation
-            loadDiscussions();
-        });
-    </script>
+    <script src="/php-social-network/assets/js/message.js"></script>
 </body>
+
 </html>
