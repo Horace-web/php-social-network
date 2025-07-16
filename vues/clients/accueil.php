@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Fil d'actualité Facebook</title>
     <link rel="stylesheet" href="/php-social-network/assets/css/style.css">
+    <link rel="stylesheet" href="/php-social-network/assets/css/message.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -31,8 +32,9 @@
             <div class="menu-icon">
                 <i class="fa-solid fa-th"></i>
             </div>
-            <div class="menu-icon">
+            <div class="menu-icon" id="messenger-icon">
                 <i class="fa-brands fa-facebook-messenger"></i>
+                <span class="notification-badge">3</span> <!-- Optionnel: badge de notification -->
             </div>
             <div class="menu-icon">
                 <i class="fa-solid fa-bell"></i>
@@ -1074,6 +1076,61 @@
         </div>
     </div>
     <script src="/php-social-network/assets/js/accueil.js"></script>
+    <script src="/php-social-network/assets/js/message.js"></script>
+    <!-- Fenêtre Messenger -->
+    <div class="messenger-dropdown" id="messenger">
+        <!-- En-tête -->
+        <div class="messenger-header">
+            <span>Messenger</span>
+            <div class="header-actions">
+                <button title="Nouvelle conversation"><i class="fa-solid fa-plus"></i></button>
+                <button title="Paramètres"><i class="fa-solid fa-gear"></i></button>
+            </div>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="messenger-search">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Rechercher sur Messenger...">
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="messenger-filters">
+            <button class="filter active">Tout</button>
+            <button class="filter">Non lu</button>
+            <button class="filter">Groupes</button>
+            <button class="filter">En ligne</button>
+        </div>
+
+        <!-- Liste des discussions -->
+        <div class="discussion-list" id="discussion-list">
+            <div class="discussion-list-title">Messages</div>
+            <!-- Remplie dynamiquement -->
+        </div>
+
+        <!-- Zone des messages -->
+        <div class="message-area" id="message-area">
+            <div class="message-header">
+                <button class="back-button" id="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="discussion-avatar online" id="current-chat-avatar">A</div>
+                <div class="discussion-info">
+                    <div class="discussion-name" id="current-chat-name">Alice</div>
+                    <div class="discussion-last-message" id="current-chat-status">En ligne</div>
+                </div>
+            </div>
+
+            <div class="message-content" id="message-content">
+                <!-- Messages chargés dynamiquement -->
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="message-input" placeholder="Tapez votre message...">
+                <button id="send-button">Envoyer</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 

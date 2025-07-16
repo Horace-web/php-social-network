@@ -1905,3 +1905,73 @@ i[onclick]:hover,
     top: 1px; /* Ajustement vertical très léger, à tester. Peut-être 0px, -1px, 2px. */
     line-height: 1; /* Supprime toute influence du line-height */
 }
+
+.media-container {
+            position: relative;
+            width: 300px;
+            cursor: pointer;
+        }
+        .media-container video, .media-container audio {
+            width: 100%;
+            display: block;
+        }
+        .mute-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        /* Styles existants conservés */
+.story-card, .reel-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Assure une bonne superposition */
+}
+/* Nouveaux styles spécifiques pour les vidéos */
+.story-background-media, .reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Ajouter un overlay pour améliorer la lisibilité */
+.story-card::after, .reel-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 50%);
+    z-index: 2;
+}
+
+.video-progress {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    right: 10px;
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.video-progress-filled {
+    height: 100%;
+    background: #4267B2;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s;
+}
