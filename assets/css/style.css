@@ -3,13 +3,37 @@ body {
 }
 
 .sidebar {
-    background: linear-gradient(180deg, #4f8cff 0%, #3358d1 100%);
+   /* background: linear-gradient(180deg, #4f8cff 0%, #3358d1 100%);*/
     color: #fff;
     min-height: 100vh;
     transition: width 0.3s;
     width: 240px;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 500px;
+    border-radius: 8px;
+}
+
+.close-button {
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+}
 .sidebar.collapsed {
     width: 70px;
 }
@@ -150,4 +174,1841 @@ body {
     border: none;
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(80, 120, 200, 0.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #18191a;
+    color: #e4e6eb;
+}
+
+.topbar {
+    background-color: #242526;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 60px;
+}
+
+.topbar .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.topbar .center {
+    display: flex;
+    justify-content: center;
+    flex: 2;
+}
+
+.topbar .right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    flex: 1;
+}
+
+.topbar .center i {
+    padding: 0 50px;
+    font-size: 24px;
+    position: relative;
+}
+
+.topbar .center i.active:after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3px;
+    background-color: #1877f2;
+}
+
+.topbar input {
+    padding: 10px 15px;
+    width: 240px;
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 15px;
+}
+
+.topbar .right i {
+    background-color: #3a3b3c;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.user-avatar {
+    width: 30px; /* Définissez une largeur */
+    height: 30px; /* Définissez une hauteur identique à la largeur pour un cercle parfait */
+    border-radius: 50%; /* Crée la forme circulaire */
+    object-fit: cover; /* Important ! Règle la façon dont l'image remplit le conteneur */
+}
+/* Styles pour la section de droite de la Topbar */
+.topbar .right {
+    display: flex; /* Utilise Flexbox */
+    align-items: center; /* Aligne les éléments verticalement au centre */
+    /* Si vous voulez un espacement uniforme entre les éléments, vous pouvez utiliser 'gap' pour CSS moderne */
+    /* gap: 8px; */
+}
+
+/* Styles pour les icônes de menu (par ex. grille, messagerie, cloche) */
+.topbar .right .menu-icon {
+    width: 40px; /* Largeur fixe */
+    height: 40px; /* Hauteur fixe */
+    border-radius: 50%; /* Rend le conteneur circulaire */
+    background-color: #3a3b3c; /* Couleur de fond (le gris foncé de Facebook) */
+    display: flex; /* Utilise Flexbox pour centrer l'icône à l'intérieur */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-left: 8px; /* Espace à gauche par rapport à l'élément précédent */
+}
+
+.topbar .right .menu-icon:hover {
+    background-color: #4e4f50; /* Couleur de fond au survol */
+}
+
+/* Taille et couleur des icônes à l'intérieur des menu-icon */
+.topbar .right .menu-icon i {
+    font-size: 1.2rem; /* Ajustez la taille de l'icône si elle ne semble pas centrée */
+    color: #e4e6eb; /* Couleur des icônes */
+}
+
+/* Styles pour le lien de profil utilisateur dans la Topbar */
+.topbar .right .topbar-profile-link {
+    width: 40px; /* Largeur fixe, identique aux menu-icon */
+    height: 40px; /* Hauteur fixe, identique aux menu-icon */
+    border-radius: 50%; /* Rend le conteneur circulaire */
+    background-color: #3a3b3c; /* Couleur de fond, identique aux menu-icon */
+    display: flex; /* Utilise Flexbox pour centrer l'avatar à l'intérieur */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    cursor: pointer;
+    text-decoration: none; /* Supprime le soulignement du lien */
+    margin-left: 8px; /* Espace à gauche, identique aux menu-icon */
+    transition: background-color 0.2s;
+}
+
+.topbar .right .topbar-profile-link:hover {
+    background-color: #4e4f50; /* Couleur de fond au survol */
+}
+
+/* Styles de l'image d'avatar à l'intérieur du lien de profil */
+.topbar .right .topbar-user-avatar {
+    width: 32px; /* L'image est légèrement plus petite que son conteneur (40px) pour créer un petit "padding" visuel */
+    height: 32px;
+    border-radius: 50%; /* Rend l'avatar rond */
+    object-fit: cover; /* Assure que l'image remplit le cercle sans déformation */
+    border: 2px solid transparent; /* Bordure transparente par défaut (peut être activée au survol) */
+    transition: border-color 0.2s; /* Transition pour la bordure */
+}
+
+.topbar .right .topbar-profile-link:hover .topbar-user-avatar {
+    border-color: rgba(255, 255, 255, 0.3); /* Bordure blanche subtile au survol */
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    align-items: flex-start;
+    /* Ajoutez ceci pour aligner les éléments en haut */
+}
+
+.sidebar {
+    width: 360px;
+    padding: 10px 15px;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+.sidebar p {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.sidebar .icon {
+    margin-right: 10px;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-title {
+    color: #b0b3b8;
+    font-size: 16px;
+    padding: 10px 0;
+    margin-top: 15px;
+    border-top: 1px solid #3e4042;
+}
+
+.feed {
+    flex: 1;
+    max-width: 680px;
+    min-width: 500px;
+    /* Ajoutez une largeur minimale */
+    margin: 0 auto;
+    /* Centre le feed */
+}
+
+.create-post {
+    background-color: #242526;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.create-post textarea {
+    width: 100%;
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    color: #e4e6eb;
+    font-size: 15px;
+    resize: none;
+    height: 40px;
+}
+
+.post {
+    background-color: #242526;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.post img {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.rightbar {
+    width: 360px;
+    padding: 10px 15px;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 100px);
+    /* Ajustez cette valeur si nécessaire */
+    overflow-y: auto;
+    background-color: #242526;
+    /* Ajoutez une couleur de fond */
+    border-radius: 10px;
+    /* Optionnel */
+    margin-left: 20px;
+    /* Espacement depuis le feed */
+    z-index: 10;
+}
+
+.right-section {
+    width: 100%;
+    /* Prend toute la largeur de la rightbar */
+    margin-bottom: 20px;
+    /* Espace entre les sections */
+    background-color: #242526;
+    /* Même couleur que la rightbar */
+    border-radius: 8px;
+    /* Cohérence visuelle */
+    padding: 12px;
+    /* Padding intérieur */
+}
+
+/* ANCIEN CSS CONSERVÉ (sauf avatar) */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.post-author {
+    font-weight: bold;
+    color: #e4e6eb;
+}
+
+.post-time {
+    color: #b0b3b8;
+    font-size: 12px;
+}
+
+.post-image {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+    object-fit: cover;
+    height: auto;
+}
+
+.post-content {
+    margin-bottom: 15px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #3e4042;
+    border-bottom: 1px solid #3e4042;
+    padding: 8px 0;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.post-action {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #b0b3b8;
+    transition: all 0.2s ease;
+    position: relative;
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+}
+
+.post-action:hover {
+    background-color: #3a3b3c;
+}
+
+.post-action i {
+    margin-right: 5px;
+}
+
+.post-avatar-container {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0; /* Empêche le rétrécissement */
+}
+
+.post-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.post-avatar-img {
+   max-width: none; /* Désactive toute contrainte de ratio */
+  height: 100%; /* Remplit la hauteur du cercle */
+  width: auto; /* Largeur ajustée proportionnellement */
+  object-fit: cover; /* Coupe les bords excédentaires */
+  object-position: center;
+}
+
+/* Anneau bleu optionnel */
+.post-avatar-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #1877f2;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+/* États des réactions */
+.post-action.liked {
+    color: #1877f2;
+}
+
+.post-action.loved {
+    color: #f3425f;
+}
+
+.post-action.haha {
+    color: #f7b928;
+}
+
+.post-action.wow {
+    color: #f7b928;
+}
+
+.post-action.sad {
+    color: #f7b928;
+}
+
+.post-action.angry {
+    color: #e9710f;
+}
+
+/* Tooltip des réactions - STATIQUE */
+.reaction-options {
+    position: relative;
+}
+
+.reaction-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border-radius: 30px;
+    padding: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    margin-bottom: 10px;
+    /* IMPORTANT: Aucune transition pour éviter le mouvement */
+    transition: none !important;
+    /* Position fixe pour éviter les décalages */
+    white-space: nowrap;
+}
+
+.reaction-tooltip.show {
+    display: flex !important;
+    /* Forcer l'affichage sans animation */
+    opacity: 1;
+    visibility: visible;
+}
+
+.reaction-tooltip:hover {
+    display: flex !important;
+}
+
+.reaction-icon {
+    width: 35px;
+    height: 35px;
+    margin: 0 3px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    /* Seules les icônes peuvent avoir des transitions, pas le conteneur */
+    transition: transform 0.2s ease;
+    /* Empêcher le mouvement du conteneur */
+    flex-shrink: 0;
+}
+
+.reaction-icon:hover {
+    transform: scale(1.2) translateY(-5px);
+}
+
+/* Couleurs des icônes de réaction */
+.reaction-like {
+    color: #1877f2;
+}
+
+.reaction-love {
+    color: #f3425f;
+}
+
+.reaction-haha {
+    color: #f7b928;
+}
+
+.reaction-wow {
+    color: #f7b928;
+}
+
+.reaction-sad {
+    color: #f7b928;
+}
+
+.reaction-angry {
+    color: #e9710f;
+}
+
+/* Icon colors */
+.icon.blue {
+    color: #1d9bf0;
+}
+
+.icon.red {
+    color: #f02849;
+}
+
+.icon.green {
+    color: #31a24c;
+}
+
+.icon.yellow {
+    color: #f7b928;
+}
+
+.icon.orange {
+    color: #ff8c00;
+}
+
+.icon.purple {
+    color: #8e44ad;
+}
+
+.icon.pink {
+    color: #ff5ca1;
+}
+
+.icon.violet {
+    color: #a26bff;
+}
+
+.icon.cyan {
+    color: #00bcd4;
+}
+
+.icon.teal {
+    color: #20c997;
+}
+
+.icon.indigo {
+    color: #6610f2;
+}
+
+.icon.grey {
+    color: #b0b3b8;
+}
+
+.fb-logo-circle {
+    background-color: #1877f2;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.status-input {
+    flex: 1;
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: #e4e6eb;
+    font-size: 15px;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    border-top: 1px solid #3e4042;
+    /* Ligne de séparation */
+    padding-top: 10px;
+    /* Espace après la ligne */
+}
+
+.post-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+    justify-content: center;
+    margin: 0 5px;
+    /* Petit espace entre les boutons */
+    color: #b0b3b8;
+    /* Couleur de texte par défaut */
+    font-weight: 500;
+    /* Légèrement plus gras */
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+/* Supprime le hover générique ici, car nous voulons des effets spécifiques */
+/* .post-option:hover { background-color: #3a3b3c; } */
+
+.post-option i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* NOUVEAU: Styles spécifiques pour chaque bouton de création de post */
+
+/* Vidéo en direct (rouge) */
+.post-option:has(i.red):hover {
+    /* Utilise :has() pour cibler le parent qui contient l'icône rouge */
+    background-color: rgba(240, 40, 73, 0.15) !important;
+    /* Rouge très léger au survol */
+    transform: translateY(-3px) !important;
+    /* Mouvement vers le haut */
+    box-shadow: 0 4px 10px rgba(240, 40, 73, 0.25) !important;
+    /* Ombre colorée */
+    filter: brightness(1.1) !important;
+    /* Légère luminosité */
+}
+
+/* Assurez-vous que l'icône garde sa couleur si elle est ciblée par un autre hover générique */
+.post-option:has(i.red) i {
+    color: #f02849;
+    /* S'assure que l'icône reste rouge */
+}
+
+/* Photo/vidéo (vert) */
+.post-option:has(i.green):hover {
+    background-color: rgba(49, 162, 76, 0.15) !important;
+    /* Vert très léger au survol */
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 10px rgba(49, 162, 76, 0.25) !important;
+    filter: brightness(1.1) !important;
+}
+
+.post-option:has(i.green) i {
+    color: #31a24c;
+    /* S'assure que l'icône reste verte */
+}
+
+/* Humeur/activité (jaune/orange) */
+.post-option:has(i.yellow):hover {
+    background-color: rgba(247, 185, 40, 0.15) !important;
+    /* Jaune très léger au survol */
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 10px rgba(247, 185, 40, 0.25) !important;
+    filter: brightness(1.1) !important;
+}
+
+.post-option:has(i.yellow) i {
+    color: #f7b928;
+    /* S'assure que l'icône reste jaune */
+}
+/* styles.css */
+.stories-wrapper {
+    position: relative;
+    margin: 20px auto;
+    width: 600px; /* Adaptez cette largeur à celle de votre fil d'actualité */
+    max-width: 100%;
+    overflow: hidden; /* Cache les flèches si elles débordent du wrapper */
+    display: flex; /* Ajouté pour s'assurer que les stories-container est bien aligné */
+    align-items: center; /* Centre verticalement le stories-container */
+    justify-content: center; /* Centre horizontalement le stories-container */
+}
+
+.stories-container {
+    display: flex; /* TRÈS IMPORTANT : Pour le layout horizontal */
+    gap: 10px;
+    padding: 10px 0;
+    overflow-x: hidden; /* Cache le défilement natif */
+    scroll-behavior: smooth; /* Pour un défilement fluide via JS */
+    flex-wrap: nowrap; /* Empêche les items de passer à la ligne */
+    flex-shrink: 0; /* Empêche le conteneur de rétrécir si le contenu est grand */
+    width: 100%; /* S'assure qu'il prend la largeur disponible du wrapper */
+    /* Ces 3 règles cachent la barre de défilement visuellement sur différents navigateurs */
+    /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
+    /* Hide scrollbar for IE and Edge */
+    -ms-overflow-style: none;
+}
+
+/* Correctif important : Cette règle doit être séparée du bloc .stories-container */
+.stories-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+
+.story-card {
+    min-width: 120px; /* Largeur minimale fixe pour chaque story */
+    height: 180px;
+    background-color: #3a3b3c;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* TRÈS IMPORTANT pour le positionnement absolu des éléments internes */
+    cursor: pointer;
+    flex-shrink: 0; /* TRÈS IMPORTANT : Empêche la carte de rétrécir */
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Ajouté pour consistance avec hover */
+}
+
+.story-card:hover {
+    transform: scale(1.03); /* Zoom légèrement la carte de 3% */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Styles pour les boutons de navigation */
+.scroll-button {
+    position: absolute;
+    top: 40%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 50%; /* Pour qu'ils soient ronds */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10; /* S'assure qu'ils sont au-dessus des stories */
+    opacity: 0.8;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.scroll-button:hover {
+    background-color: #3a3b3c;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.scroll-button.left {
+    left: 10px;
+}
+
+.scroll-button.right {
+    right: 10px;
+}
+
+/* NOUVEAUX STYLES POUR LES ÉLÉMENTS INTERNES DE LA STORY-CARD */
+
+/* Style de l'image de fond de la story (le grand aperçu) */
+.story-background-img {
+    width: 100%; /* L'image remplit toute la largeur de la carte */
+    height: 100%; /* L'image remplit toute la hauteur de la carte */
+    object-fit: cover; /* Recadre l'image pour qu'elle couvre entièrement la zone sans être déformée */
+    position: absolute; /* Positionne l'image par rapport à la story-card */
+    top: 0;
+    left: 0;
+    z-index: 1; /* S'assure qu'elle est en dessous des autres éléments */
+}
+
+/* Style de la photo de profil de l'utilisateur (le petit cercle dans le coin) */
+.story-profile-pic {
+    width: 32px; /* Taille de la photo de profil (ex: 32x32 pixels) */
+    height: 32px; /* Doit être égale à la largeur pour un cercle parfait */
+    border-radius: 50%; /* Transforme l'image en cercle */
+    object-fit: cover; /* Recadre l'image pour qu'elle remplisse parfaitement le cercle */
+    position: absolute; /* Positionne cette image par rapport à la story-card */
+    top: 10px; /* Décalage de 10px du haut */
+    left: 10px; /* Décalage de 10px de la gauche */
+    border: 2px solid #1877f2; /* Bordure bleue autour de la photo de profil */
+    z-index: 2; /* S'assure qu'elle est au-dessus de l'image de fond */
+}
+
+/* Style du nom de l'utilisateur dans la story-card */
+.story-user-name {
+    position: absolute; /* Positionne le nom par rapport à la story-card */
+    bottom: 10px; /* Décalage de 10px du bas */
+    left: 10px; /* Décalage de 10px de la gauche */
+    color: white; /* Couleur du texte */
+    font-weight: bold;
+    font-size: 13px;
+    z-index: 2; /* S'assure qu'il est au-dessus de l'image de fond */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Améliore la lisibilité sur des fonds variés */
+}
+
+/* Assurez-vous d'avoir aussi ces styles pour vos avatars standards ailleurs si ce n'est pas déjà fait */
+.user-avatar, .post-avatar, .comment-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-avatar { /* pour l'avatar dans la topbar */
+    width: 30px;
+    height: 30px;
+}
+.post-avatar { /* pour l'avatar dans les posts */
+    width: 40px;
+    height: 40px;
+}
+.comment-avatar { /* pour l'avatar dans les commentaires */
+    width: 30px;
+    height: 30px;
+}
+
+/* STYLES MIS À JOUR POUR LES ÉLÉMENTS INTERNES DE LA STORY-CARD */
+
+/* Appliquez ces styles à la fois aux images et aux vidéos de fond de story */
+.story-background-media {
+    width: 100%; /* L'élément remplit toute la largeur de la carte */
+    height: 100%; /* L'élément remplit toute la hauteur de la carte */
+    object-fit: cover; /* Recadre l'élément pour qu'il couvre entièrement la zone sans être déformée */
+    position: absolute; /* Positionne l'élément par rapport à la story-card */
+    top: 0;
+    left: 0;
+    z-index: 1; /* S'assure qu'il est en dessous des autres éléments */
+}
+
+/* Ajoute un léger dégradé par-dessus l'image/vidéo pour améliorer la lisibilité du texte/profil */
+.story-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 1.5; /* Entre le média (1) et le texte/profil (2) */
+    border-radius: 10px; /* S'assure que le dégradé respecte les coins arrondis de la carte */
+}
+
+/* Style de la photo de profil de l'utilisateur (le petit cercle dans le coin) */
+.story-profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border: 2px solid #1877f2;
+    z-index: 2; /* Au-dessus du média et du dégradé */
+}
+
+/* Style du nom de l'utilisateur dans la story-card */
+.story-user-name {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    z-index: 2; /* Au-dessus du média et du dégradé */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Styles pour les avatars génériques (topbar, posts, commentaires) */
+.user-avatar, .post-avatar, .comment-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-avatar {
+    width: 30px;
+    height: 30px;
+}
+.post-avatar {
+    width: 40px;
+    height: 40px;
+}
+.comment-avatar {
+    width: 30px;
+    height: 30px;
+}
+/* IMPORTANT: Exclure les tooltips des transitions globales */
+button,
+[class*="btn"],
+[class*="button"],
+[class*="action"],
+i[onclick],
+[role="button"],
+[tabindex="0"],
+.post-action,
+.sidebar p,
+.topbar i
+
+/* Retire .post-option de ce sélecteur général pour gérer son hover spécifiquement */
+    {
+    transition: all 0.25s ease !important;
+}
+
+/* Exceptions: PAS de transition pour les tooltips */
+.reaction-tooltip,
+.reaction-tooltip * {
+    transition: none !important;
+}
+
+/* Seules les icônes individuelles peuvent bouger */
+.reaction-icon {
+    transition: transform 0.2s ease !important;
+}
+
+button:hover,
+[class*="btn"]:hover,
+[class*="button"]:hover,
+[class*="action"]:hover,
+i[onclick]:hover,
+[role="button"]:hover,
+[tabindex="0"]:hover,
+.post-action:hover,
+.sidebar p:hover,
+.topbar i:hover {
+    /* Ces propriétés seront gérées par les hovers spécifiques des post-option */
+    background-color: #3a3b3c !important;
+    /* Revert to standard gray hover for general elements */
+    transform: translateY(-2px) !important;
+    box-shadow:
+        0 4px 12px rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(24, 119, 242, 0.2) !important;
+    filter: brightness(1.1) !important;
+}
+
+/* Ajout d'une règle générale pour .post-option:hover si aucune règle spécifique n'est appliquée (par exemple, si une autre .post-option sans i.red/green/yellow existait) */
+.post-option:hover {
+    background-color: #3a3b3c;
+    /* Revert to the standard gray hover for uncolored post-options */
+    /* Ces propriétés peuvent être surchargées par les règles :has() */
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 12px rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(24, 119, 242, 0.2);
+    filter: brightness(1.1);
+}
+
+/* Exception: le tooltip ne doit PAS bouger au survol */
+.reaction-tooltip:hover,
+.reaction-options:hover .reaction-tooltip {
+    transform: translateX(-50%) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    filter: none !important;
+}
+
+.post:hover {
+    box-shadow:
+        0 6px 20px rgba(255, 255, 255, 0.18),
+        0 3px 6px rgba(24, 119, 242, 0.25) !important;
+    transform: translateY(-3px) !important;
+}
+
+.sponsored-card {
+    background-color: #242526;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.sponsored-label {
+    padding: 8px 12px;
+    color: #b0b3b8;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.sponsored-label:before {
+    content: "●";
+    color: #1877f2;
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.sponsored-content {
+    padding: 0 12px 12px;
+}
+
+.sponsored-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sponsored-link {
+    color: #b0b3b8;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+/* .section-header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 {
+    font-size: 16px;
+}
+
+.see-all {
+    color: #1877f2;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.contacts-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.contacts-icons i {
+    color: #b0b3b8;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.contacts-icons i:hover {
+    background-color: #3a3b3c;
+}
+
+.messenger-contact {
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 2px;
+}
+
+.messenger-contact:hover {
+    background-color: #3a3b3c;
+}
+
+.contact-avatar-wrapper {
+    position: relative;
+    margin-right: 12px;
+}
+
+.contact-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.meta-ai-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #00d4ff, #ff4081, #ffeb3b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.verified-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    background-color: #1877f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #242526;
+}
+
+.verified-badge i {
+    color: white;
+    font-size: 10px;
+}
+
+.online-status {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #242526;
+}
+
+.online-status.online {
+    background-color: #31a24c;
+}
+
+.online-status.offline {
+    background-color: #8a8d91;
+}
+
+.online-status.recent {
+    background-color: #8a8d91;
+}
+
+.contact-name {
+    font-weight: 500;
+    color: #e4e6eb;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.last-seen {
+    color: #b0b3b8;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.group-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #3a3b3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b0b3b8;
+    font-size: 16px;
+}
+
+.group-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background-color: #42b883;
+    color: white;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 8px;
+    border: 1px solid #242526;
+    min-width: 20px;
+    text-align: center;
+}
+
+.group-description {
+    color: #b0b3b8;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.create-group-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #3a3b3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b0b3b8;
+    font-size: 16px;
+}
+
+.section-title {
+    color: #b0b3b8;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 12px 8px 12px;
+    margin-top: 10px;
+}
+
+.mutual-friends {
+    color: #b0b3b8;
+    font-size: 12px;
+}
+
+.contact-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+}
+
+.confirm-btn,
+.delete-btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    background-color: #1877f2;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #3a3b3c;
+    color: #e4e6eb;
+}
+
+.birthday-content {
+    display: flex;
+    align-items: center;
+}
+
+.birthday-content:before {
+    content: "🎉";
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Styles pour la section de commentaires */
+.post-comments {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #3e4042;
+    /* Ligne de séparation */
+    /* display: none; sera géré par le JavaScript */
+}
+
+.comment-stats {
+    color: #b0b3b8;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: right;
+    /* Aligner le compteur à droite comme FB */
+}
+
+/* NOUVEAUX STYLES POUR LA ZONE DE SAISIE DE COMMENTAIRE */
+.comment-input-area {
+    display: flex;
+    align-items: flex-start; /* Aligne l'avatar en haut du conteneur */
+    padding: 10px 0;
+    /* border-top: 1px solid #3e4042; /* Cette ligne pourrait être retirée si elle fait double emploi avec .post-comments border-top */ 
+    margin-top: 10px;
+}
+
+.comment-input-area .comment-avatar {
+    width: 32px; /* Taille légèrement plus grande pour l'avatar dans l'input */
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    flex-shrink: 0; /* Empêche l'avatar de rétrécir */
+}
+
+.comment-input-container {
+    flex-grow: 1; /* Prend l'espace disponible */
+    display: flex;
+    flex-direction: column; /* Empile l'input et les options */
+    background-color: #3a3b3c;
+    border-radius: 18px; /* Forme de bulle */
+    padding: 6px 12px; /* Espacement intérieur */
+    position: relative; /* Pour positionner les icônes si besoin */
+}
+
+.comment-input-container .comment-input {
+    width: 100%;
+    background: transparent; /* Fond transparent */
+    border: none;
+    outline: none; /* Supprime le contour au focus */
+    color: #e4e6eb;
+    font-size: 15px;
+    padding-right: 30px; /* Espace pour les icônes si elles étaient à droite de l'input */
+    resize: none; /* Empêche le redimensionnement manuel si c'était un textarea */
+    min-height: 20px; /* Hauteur minimale pour une seule ligne */
+}
+
+.comment-input-container .comment-input::placeholder {
+    color: #b0b3b8;
+}
+
+.comment-input-options {
+    display: flex;
+    justify-content: flex-end; /* Aligne les icônes à droite */
+    gap: 10px; /* Espacement entre les icônes */
+    padding-top: 5px; /* Petit espace au-dessus des icônes */
+}
+
+.comment-input-options i {
+    color: #b0b3b8; /* Couleur des icônes */
+    cursor: pointer;
+    font-size: 16px; /* Taille des icônes */
+}
+
+.comment-input-options i:hover {
+    color: #e4e6eb; /* Changement de couleur au survol */
+}
+/* FIN NOUVEAUX STYLES */
+
+/* Styles existants pour les commentaires individuels, gardez-les tels quels */
+.comments-list {
+    margin-top: 10px;
+}
+
+.comment-item {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-start;
+    /* Aligner l'avatar en haut du commentaire */
+}
+
+.comment-item .comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-content-and-actions {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.comment-content-wrapper {
+    background-color: #3a3b3c;
+    border-radius: 18px;
+    padding: 8px 12px;
+    max-width: fit-content;
+    margin-bottom: 4px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #e4e6eb;
+    font-size: 13px;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.comment-text {
+    color: #e4e6eb;
+    font-size: 14px;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.comment-actions-row {
+    display: flex;
+    gap: 10px;
+    margin-left: 12px;
+    font-size: 12px;
+    color: #b0b3b8;
+}
+
+.comment-action-link {
+    color: #b0b3b8;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.comment-action-link:hover {
+    text-decoration: underline;
+}
+
+.comment-time {
+    color: #b0b3b8;
+    font-size: 12px;
+}
+
+/* Section globale des Réels */
+.reels-section {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.reels-section .section-title {
+    margin-left: 20px; /* Aligner avec le padding du container */
+    margin-bottom: 15px;
+    color: #e4e6eb; /* Couleur du texte */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Wrapper pour le défilement horizontal des Réels */
+.reels-wrapper {
+    position: relative;
+    margin: 0 auto; /* Centre le wrapper */
+    width: 600px; /* Adaptez à la largeur de votre fil d'actu */
+    max-width: 100%;
+    overflow: hidden; /* Cache les flèches si elles débordent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reels-container {
+    display: flex;
+    gap: 15px; /* Espacement entre les cartes de Réels */
+    padding: 10px 0;
+    overflow-x: hidden; /* Cache le défilement natif */
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.reels-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Styles de chaque carte de Reel */
+.reel-card {
+    min-width: 200px; /* Largeur d'une carte de Reel */
+    height: 350px; /* Hauteur d'une carte de Reel (format vertical) */
+    background-color: #242526; /* Couleur de fond */
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* Indispensable pour positionner les éléments internes */
+    flex-shrink: 0; /* Empêche le rétrécissement */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.reel-card:hover {
+    transform: scale(1.02); /* Léger zoom au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Style de la vidéo du Reel */
+.reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre la vidéo pour remplir la carte */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* En dessous des autres éléments */
+}
+
+/* Overlay pour améliorer la lisibilité du texte sur la vidéo */
+.reel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 100%);
+    z-index: 2; /* Au-dessus de la vidéo, en dessous du contenu */
+    border-radius: 10px; /* Pour respecter les bords arrondis de la carte */
+}
+
+/* Conteneur pour le texte et les éléments interactifs du Reel */
+.reel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    color: white;
+    z-index: 3; /* Au-dessus de l'overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%; /* S'étend sur toute la hauteur pour que bottom 0 fonctionne */
+}
+
+.reel-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reel-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1877f2; /* Bordure bleue */
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.reel-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.reel-user-name {
+    font-weight: bold;
+    font-size: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.reel-follow-btn {
+    background-color: transparent;
+    color: #1877f2; /* Couleur bleue typique de Facebook */
+    border: 1px solid #1877f2;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.2s;
+    align-self: flex-start; /* Aligner avec le texte */
+}
+
+.reel-follow-btn:hover {
+    background-color: rgba(24, 119, 242, 0.2);
+}
+
+.reel-description {
+    font-size: 14px;
+    margin-top: auto; /* Pousse la description vers le bas */
+    margin-bottom: 15px; /* Espace avant les actions */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limite à 3 lignes */
+    -webkit-box-orient: vertical;
+}
+
+/* Actions du Reel (j'aime, commentaire, partager) */
+.reel-actions {
+    position: absolute;
+    right: 10px; /* Positionnement à droite */
+    bottom: 15px; /* Aligner avec le contenu du bas */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre les icônes */
+    color: white;
+    z-index: 3;
+    text-align: center;
+}
+
+.reel-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+.reel-action-item i {
+    font-size: 22px;
+    margin-bottom: 3px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.reel-action-item span {
+    font-size: 12px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Styles pour les boutons de navigation des Réels (réutilisation des .scroll-button existants) */
+.reels-wrapper .scroll-button {
+    top: 45%; /* Centre verticalement les boutons par rapport au wrapper des réels */
+}
+
+/* Styles pour la section "Créer une publication" */
+.create-post {
+    background-color: #242526;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #3a3b3c;
+    border-radius: 50px; /* Pour donner l'apparence d'un champ de texte arrondi */
+    cursor: pointer; /* Indique que c'est cliquable */
+    margin-bottom: 15px;
+    transition: background-color 0.2s;
+}
+
+.post-input-container:hover {
+    background-color: #4e4f50; /* Légère modification au survol */
+}
+
+.post-input-container .post-avatar { /* Réutiliser la classe post-avatar existante */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.post-placeholder {
+    flex-grow: 1; /* Prend l'espace restant */
+    color: #b0b3b8; /* Couleur du texte placeholder */
+    font-size: 15px;
+    padding: 5px 0; /* Un peu de padding interne */
+}
+
+.post-actions-quick {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid #3e4042; /* Ligne de séparation */
+}
+
+.post-actions-quick .action-button {
+    background: none;
+    border: none;
+    color: #b0b3b8;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.post-actions-quick .action-button:hover {
+    background-color: #3a3b3c;
+    color: #e4e6eb;
+}
+
+.post-actions-quick .action-button i {
+    font-size: 18px;
+}
+
+/* Styles pour la Fenêtre Modale */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste en place même en scrollant */
+    z-index: 1001; /* Doit être au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permet le défilement si le contenu est trop grand */
+    background-color: rgba(0, 0, 0, 0.7); /* Fond noir semi-transparent */
+    display: flex; /* Utilisation de flexbox pour centrer */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #242526;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px; /* Largeur maximale de la modale */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    color: #e4e6eb;
+}
+
+.close-button {
+    color: #b0b3b8;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #e4e6eb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.modal-divider {
+    border-top: 1px solid #3e4042;
+    margin-bottom: 20px;
+}
+
+.modal-header-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header-user .post-avatar { /* Réutiliser la classe post-avatar */
+    width: 50px; /* Un peu plus grand dans la modale */
+    height: 50px;
+    margin-right: 10px;
+}
+
+.modal-username {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.modal-textarea {
+    width: 100%;
+    min-height: 150px; /* Hauteur minimale pour le champ de texte */
+    background-color: #3a3b3c;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    color: #e4e6eb;
+    font-size: 16px;
+    resize: vertical; /* Permet le redimensionnement vertical par l'utilisateur */
+    box-sizing: border-box; /* Inclut padding et border dans la largeur/hauteur */
+}
+
+.modal-textarea::placeholder {
+    color: #b0b3b8;
+}
+
+.modal-media-upload {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 1px dashed #3e4042;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #3a3b3c;
+    color: #1877f2; /* Bleu Facebook */
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.upload-button:hover {
+    background-color: #4e4f50;
+}
+
+.upload-button i {
+    font-size: 18px;
+}
+
+.media-preview {
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.media-preview img, .media-preview video {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    object-fit: contain; /* Pour ne pas couper l'image/vidéo dans l'aperçu */
+}
+
+
+.publish-button {
+    width: 100%;
+    background-color: #1877f2; /* Bleu Facebook */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.publish-button:hover {
+    background-color: #166fe5; /* Bleu un peu plus foncé au survol */
+}
+
+/* Couleurs spécifiques pour les icônes dans les boutons rapides de publication */
+.post-actions-quick .action-button i.red {
+    color: #f02849; /* Rouge vif, typique pour "Vidéo en direct" */
+}
+
+.post-actions-quick .action-button i.green {
+    color: #42b72a; /* Vert vif, typique pour "Photo/Vidéo" */
+}
+
+.post-actions-quick .action-button i.blue-reel {
+    color: #1877f2; /* Bleu vif, typique pour "Reel" */
+}
+
+/*/* Correction agressive pour alignement des icônes Font Awesome dans la topbar */
+.topbar .right .menu-icon i {
+    display: block; /* S'assure que l'icône se comporte comme un bloc */
+    position: relative; /* Pour positionner l'icône si nécessaire */
+    top: 1px; /* Ajustement vertical très léger, à tester. Peut-être 0px, -1px, 2px. */
+    line-height: 1; /* Supprime toute influence du line-height */
+}
+
+.media-container {
+            position: relative;
+            width: 300px;
+            cursor: pointer;
+        }
+        .media-container video, .media-container audio {
+            width: 100%;
+            display: block;
+        }
+        .mute-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        /* Styles existants conservés */
+.story-card, .reel-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Assure une bonne superposition */
+}
+/* Nouveaux styles spécifiques pour les vidéos */
+.story-background-media, .reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Ajouter un overlay pour améliorer la lisibilité */
+.story-card::after, .reel-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 50%);
+    z-index: 2;
+}
+
+.video-progress {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    right: 10px;
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.video-progress-filled {
+    height: 100%;
+    background: #4267B2;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s;
+}
+
+#postModal {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
