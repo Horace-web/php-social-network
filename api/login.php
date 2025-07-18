@@ -31,14 +31,18 @@ if (!$user['est_active']) {
     exit();
 }
 
-// Connexion réussie : on renvoie les infos utiles
+// Stockage des données dans la session
+$_SESSION['user'] = [
+    'id' => $user['id'],
+    'nom' => $user['nom'],
+    'prenom' => $user['prenom'],
+    'email' => $email
+];
+
+// Réponse JSON
 echo json_encode([
     'success' => true,
-    'user' => [
-        'id' => $user['id'],
-        'nom' => $user['nom'],
-        'prenom' => $user['prenom'],
-        'email' => $email
-    ]
+    'user' => $_SESSION['user'], // On renvoie les mêmes données que la session
+    'redirect' => 'accueil.php' // Optionnel : suggestion de redirection
 ]);
 ?>

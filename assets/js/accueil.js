@@ -328,7 +328,7 @@ function initVideoPlayer() {
             right: 20px;
             font-size: 24px;
         }
-    `;
+    `;}
     document.head.appendChild(style);
 
     function playVideo(videoElement) {
@@ -378,7 +378,7 @@ function initVideoPlayer() {
                     .catch(e => console.error("Échec de lecture même en mute:", e));
             });
         }
-    }
+    });
 
     // Gestion des clics sur les stories et reels
     document.querySelectorAll('.story-card, .reel-card').forEach(card => {
@@ -389,10 +389,7 @@ function initVideoPlayer() {
     });
 
     // Contrôles vidéo
-    const videoPlayerElement = videoPlayer.querySelector('.fullscreen-video');
-    const pauseBtn = videoPlayer.querySelector('.pause-btn');
-    const muteBtn = videoPlayer.querySelector('.mute-btn');
-    const closeBtn = videoPlayer.querySelector('.close-video-btn');
+    // (videoPlayerElement, pauseBtn, muteBtn, closeBtn already declared above)
 
     // Bouton pause/play
     pauseBtn.addEventListener('click', function() {
@@ -537,6 +534,51 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.comment-reaction-options .reaction-tooltip').forEach(tooltip => {
                 tooltip.classList.remove('show');
             });
+        }
+    });
+});
+
+// Gestion du modal
+const postModal = document.getElementById('postModal');
+const openPostModal = document.getElementById('openPostModal');
+const closePostModal = document.getElementById('closePostModal');
+
+// Ouvrir le modal quand on clique sur la zone de publication
+openPostModal.addEventListener('click', () => {
+    postModal.style.display = 'block';
+});
+
+// Fermer le modal
+closePostModal.addEventListener('click', () => {
+    postModal.style.display = 'none';
+});
+
+// Fermer si on clique en dehors
+window.addEventListener('click', (event) => {
+    if (event.target === postModal) {
+        postModal.style.display = 'none';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('postModal');
+    const openBtn = document.getElementById('openPostModal');
+    const closeBtn = document.getElementById('closePostModal');
+
+    // Ouvrir le modal
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex'; // Ou 'block' selon ta structure
+    });
+
+    // Fermer le modal
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Fermer en cliquant en dehors
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
         }
     });
 });

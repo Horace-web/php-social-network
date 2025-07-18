@@ -1,5 +1,30 @@
 <?php
+session_start();
 
+require_once '../../api/connection.php';
+
+// Initialisation avec valeur par défaut
+$currentUserName = 'Invité';
+
+if (isset($_SESSION['user_id'])) {
+    try {
+        $stmt = $pdo->prepare("SELECT nom, prenom FROM utilisateurs WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user) {
+            // Construction du nom complet
+            $currentUserName = htmlspecialchars(
+                trim($user['prenom'] . ' ' . $user['nom']),
+                ENT_QUOTES,
+                'UTF-8'
+            );
+        }
+    } catch (PDOException $e) {
+        error_log("Erreur de base de données : " . $e->getMessage());
+        // On conserve la valeur par défaut en cas d'erreur
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,7 +35,7 @@
     <link rel="stylesheet" href="/php-social-network/assets/css/style.css">
     <link rel="stylesheet" href="/php-social-network/assets/css/message.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="accueil.js"></script>
 </head>
 
 <body>
@@ -1061,8 +1086,8 @@
                 <img src="/php-social-network/assets/img/avatar.jpeg" alt="Profil" class="post-avatar">
                 <span class="modal-username" id="modalUserNamePlaceholder">Nom de l'utilisateur</span>
 
-                <textarea id="postContent" placeholder="Quoi de neuf, <span id="
-                    textareaPlaceholderName">Utilisateur</span> ?" class="modal-textarea"></textarea>
+                
+                <textarea id="postContent" placeholder="Quoi de neuf, Utilisateur ?" class="modal-textarea"></textarea>
             </div>
             <div class="modal-media-upload">
                 <input type="file" id="mediaUpload" accept="image/*,video/*" style="display: none;">
